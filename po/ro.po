@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: phpMyAdmin 3.5.0-beta2\n"
 "Report-Msgid-Bugs-To: phpmyadmin-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-02-14 16:01+0100\n"
-"PO-Revision-Date: 2012-02-14 14:13+0200\n"
+"PO-Revision-Date: 2012-02-21 15:11+0200\n"
 "Last-Translator: alexukf <alex.ukf@gmail.com>\n"
 "Language-Team: romanian <ro@li.org>\n"
 "Language: ro\n"
@@ -6028,13 +6028,14 @@ msgid ""
 "formatting strings. Additionally the following transformations will happen: "
 "%3$s. Other text will be kept as is. See the %4$sFAQ%5$s for details."
 msgstr ""
-"This value is interpreted using %1$sstrftime%2$s, so you can use time "
-"formatting strings. Additionally the following transformations will happen: "
-"%3$s. Other text will be kept as is."
+"Această valoare este interpretată folosind %1$sstrftime%2$s, ca sa puteţi "
+"folosi şiruri de formatare a timpului. În plus, următoarele transformări vor "
+"avea loc: %3$s. Orice alt text va fi păstrat aşa cum este. Vedeţi %4$sFAQ%"
+"5$s pentru detalii."
 
 #: libraries/display_export.lib.php:270
 msgid "use this for future exports"
-msgstr ""
+msgstr "folosiţi pentru viitoare exportări"
 
 #: libraries/display_export.lib.php:276 libraries/display_import.lib.php:188
 #: libraries/display_import.lib.php:201 libraries/sql_query_form.lib.php:468
@@ -6089,6 +6090,8 @@ msgid ""
 "Scroll down to fill in the options for the selected format and ignore the "
 "options for other formats."
 msgstr ""
+"Faceţi scroll în jos pentru a completa opţiunile pentru formatul selectat şi "
+"ignoraţi opţiunile pentru alte formate."
 
 #: libraries/display_export.lib.php:342 libraries/display_import.lib.php:260
 #, fuzzy
@@ -6101,32 +6104,36 @@ msgid ""
 "this is a known bug in webkit based (Safari, Google Chrome, Arora etc.) "
 "browsers."
 msgstr ""
+"Fişierul care este uploadat este probabil mai mare decât mărimea maximă "
+"permisă sau acesta este un bug cunoscut in browser-ele bazate pe webkit "
+"(Safari, Google Chrome, Arora etc.)"
 
 #: libraries/display_import.lib.php:76
 msgid "The file is being processed, please be patient."
-msgstr ""
+msgstr "Fişierul este procesat, vă rugăm să aveţi răbdare."
 
 #: libraries/display_import.lib.php:98
 msgid ""
 "Please be patient, the file is being uploaded. Details about the upload are "
 "not available."
 msgstr ""
+"Vă rugăm să aveţi răbdare, fişierul este uploadat. Nu sunt disponibile "
+"detalii despre upload."
 
 #: libraries/display_import.lib.php:129
-#, fuzzy
 #| msgid "Cannot log in to the MySQL server"
 msgid "Importing into the current server"
-msgstr "Nu pot face conexiunea catre serverul MySQL"
+msgstr "Se importă pe server-ul curent"
 
 #: libraries/display_import.lib.php:131
-#, fuzzy, php-format
+#, php-format
 msgid "Importing into the database \"%s\""
-msgstr "Nu sînt baze de date"
+msgstr "Se importă în baza de date \"%s\""
 
 #: libraries/display_import.lib.php:133
-#, fuzzy, php-format
+#, php-format
 msgid "Importing into the table \"%s\""
-msgstr "Nu sînt baze de date"
+msgstr "Se importă în tabela \"%s\""
 
 #: libraries/display_import.lib.php:139
 #, fuzzy
@@ -6137,13 +6144,15 @@ msgstr "Fișier de importat"
 #: libraries/display_import.lib.php:156
 #, php-format
 msgid "File may be compressed (%s) or uncompressed."
-msgstr ""
+msgstr "Fişierul poate fi comprimat (%s) sau necomprimat."
 
 #: libraries/display_import.lib.php:158
 msgid ""
 "A compressed file's name must end in <b>.[format].[compression]</b>. "
 "Example: <b>.sql.zip</b>"
 msgstr ""
+"Numele unui fişier comprimat trebuie să se termine în "
+"<b>.[format].[compresie]</b>. Exemplu: <b>.sql.zip</b>"
 
 #: libraries/display_import.lib.php:178
 msgid "File uploads are not allowed on this server."
@@ -6241,7 +6250,7 @@ msgstr "vertical"
 #: libraries/display_tbl.lib.php:445
 #, php-format
 msgid "Headers every %s rows"
-msgstr ""
+msgstr "Capete de tabel la fiecare %s rânduri"
 
 #: libraries/display_tbl.lib.php:548
 msgid "Sort by key"
@@ -6288,25 +6297,25 @@ msgstr "Relational display field"
 
 #: libraries/display_tbl.lib.php:675
 msgid "Show binary contents"
-msgstr ""
+msgstr "Afişează conţinut binar"
 
 #: libraries/display_tbl.lib.php:677
 msgid "Show BLOB contents"
-msgstr ""
+msgstr "Afişează conţinut BLOB"
 
 #: libraries/display_tbl.lib.php:687
-#, fuzzy
 #| msgid "Browser transformation"
 msgid "Hide browser transformation"
-msgstr "Transformare navigator"
+msgstr "Ascunde transformarea browser-ului"
 
 #: libraries/display_tbl.lib.php:694
 msgid "Well Known Text"
-msgstr ""
+msgstr "Text Bine Cunoscut"
 
 #: libraries/display_tbl.lib.php:695
+#, fuzzy
 msgid "Well Known Binary"
-msgstr ""
+msgstr "Binar Bine Cunoscut"
 
 #: libraries/display_tbl.lib.php:1406 libraries/display_tbl.lib.php:1418
 msgid "The row has been deleted"
@@ -6554,30 +6563,30 @@ msgid "Garbage Threshold"
 msgstr "Prag gunoi"
 
 #: libraries/engines/pbms.lib.php:31
-#, fuzzy
 #| msgid ""
 #| " percentage of garbage in a data log file before it is compacted. This a "
 #| "value between 1 and 99. The default is 50."
 msgid "The percentage of garbage in a repository file before it is compacted."
 msgstr ""
-"The percentage of garbage in a data log file before it is compacted. This is "
-"a value between 1 and 99. The default is 50."
+"Procentul de gunoi dintr-un fișier din repository înainte să fie comprimat."
 
 #: libraries/engines/pbms.lib.php:35 libraries/replication_gui.lib.php:70
 #: server_synchronize.php:1261
-#, fuzzy
 msgid "Port"
-msgstr "Sortare"
+msgstr "Port"
 
 #: libraries/engines/pbms.lib.php:36
 msgid ""
 "The port for the PBMS stream-based communications. Setting this value to 0 "
 "will disable HTTP communication with the daemon."
 msgstr ""
+"Portul pentru comunicațiile PBMS bazate pe stream. Setarea acestei valoari "
+"la 0 va dezactiva comunicarea HTTP cu daemon-ul."
 
 #: libraries/engines/pbms.lib.php:40
+#, fuzzy
 msgid "Repository Threshold"
-msgstr ""
+msgstr "Prag Repository"
 
 #: libraries/engines/pbms.lib.php:41
 msgid ""
@@ -6585,16 +6594,23 @@ msgid ""
 "indicate the unit of the value. A value in bytes is assumed when no unit is "
 "specified."
 msgstr ""
+"Mărimea maximă a unui fișier BLOB din repository. Puteți folosi KB, MB sau "
+"GB pentru a indica unitatea valorii. Dacă nu specificați nicio unitate, se "
+"va considera valoarea in bytes."
 
 #: libraries/engines/pbms.lib.php:45
+#, fuzzy
 msgid "Temp Blob Timeout"
-msgstr ""
+msgstr "Timeout Blob temporar"
 
 #: libraries/engines/pbms.lib.php:46
 msgid ""
 "The timeout, in seconds, for temporary BLOBs. Uploaded BLOB data is removed "
 "after this time, unless they are referenced by a record in the database."
 msgstr ""
+"Timeout-ul, în secunde, pentru BLOB-uri temporare. Datele BLOB uploadate "
+"sunt șterse după acest interval, mai puțin dacă sunt referite printr-o "
+"intrare în baza de date. "
 
 #: libraries/engines/pbms.lib.php:50
 #, fuzzy
@@ -6608,33 +6624,44 @@ msgid ""
 "indicate the unit of the value. A value in bytes is assumed when no unit is "
 "specified."
 msgstr ""
+"Mărimea maximă a unui fișier log BLOB temporar. Puteți folosi KB, MB sau GB "
+"pentru a indica unitatea valorii. Dacă nu specificați nicio unitate, se va "
+"considera valoarea in bytes."
 
 #: libraries/engines/pbms.lib.php:55
+#, fuzzy
 msgid "Max Keep Alive"
-msgstr ""
+msgstr "Valoarea maximă keep alive"
 
 #: libraries/engines/pbms.lib.php:56
 msgid ""
 "The timeout for inactive connection with the keep-alive flag set. After this "
 "time the connection will be closed. The time-out is in milliseconds (1/1000)."
 msgstr ""
+"Timeout-ul pentru conexiune inactivă cu flag-ul keep-alive setat. După acest "
+"timp, conexiunea va fi închisă. Timeout-ul este exprimat in milisecunde "
+"(1/1000)."
 
 #: libraries/engines/pbms.lib.php:60
 msgid "Metadata Headers"
-msgstr ""
+msgstr "Headere Metadata"
 
 #: libraries/engines/pbms.lib.php:61
 msgid ""
 "A \":\" delimited list of metadata headers to be used to initialize the "
 "pbms_metadata_header table when a database is created."
 msgstr ""
+"Un simbol \":\" delimitează lista headerelor metadata ce vor fi folosite la "
+"inițializarea tabelei pbms_metadata_header când se creează o bază de date."
 
 #: libraries/engines/pbms.lib.php:94
-#, php-format
+#, fuzzy, php-format
 msgid ""
 "Documentation and further information about PBMS can be found on %sThe "
 "PrimeBase Media Streaming home page%s."
 msgstr ""
+"Documentația și mai multe informații despre PBMS pot fi găsite la %sThe "
+"PrimeBase Media Streaming home page%s."
 
 #: libraries/engines/pbms.lib.php:96 libraries/engines/pbxt.lib.php:127
 #, fuzzy
@@ -6643,12 +6670,13 @@ msgid "Related Links"
 msgstr "Legături"
 
 #: libraries/engines/pbms.lib.php:98
+#, fuzzy
 msgid "The PrimeBase Media Streaming Blog by Barry Leslie"
-msgstr ""
+msgstr "Blogul de media streaming PrimeBase de Barry Leslie"
 
 #: libraries/engines/pbms.lib.php:99
 msgid "PrimeBase XT Home Page"
-msgstr ""
+msgstr "Pagina principală PrimeBase XT"
 
 #: libraries/engines/pbxt.lib.php:22
 msgid "Index cache size"
@@ -6659,22 +6687,25 @@ msgid ""
 "This is the amount of memory allocated to the index cache. Default value is "
 "32MB. The memory allocated here is used only for caching index pages."
 msgstr ""
-"This is the amount of memory allocated to the index cache. Default value is "
-"32MB. The memory allocated here is used only for caching index pages."
+"Aceasta este memoria alocată cache-ului pentru index. Valoarea default este "
+"32MB. Memoria alocată aici este folosită doar pentru cache-uirea paginilor "
+"index."
 
 #: libraries/engines/pbxt.lib.php:27
 msgid "Record cache size"
 msgstr "Dimensiune cache înregistrare"
 
 #: libraries/engines/pbxt.lib.php:28
+#, fuzzy
 msgid ""
 "This is the amount of memory allocated to the record cache used to cache "
 "table data. The default value is 32MB. This memory is used to cache changes "
 "to the handle data (.xtd) and row pointer (.xtr) files."
 msgstr ""
-"This is the amount of memory allocated to the record cache used to cache "
-"table data. The default value is 32MB. This memory is used to cache changes "
-"to the handle data (.xtd) and row pointer (.xtr) files."
+"Aceasta este memoria alocată cache-ului pentru înregistrări folosit pentru a "
+"cache-ui date tabelare. Valoarea default este 32MB. Memoria alocată aici "
+"este folosită pentru cache-uirea schimbărilor la datele de manipulare (.xtd) "
+"și fișierele row pointer (.xtr)."
 
 #: libraries/engines/pbxt.lib.php:32
 msgid "Log cache size"
@@ -6697,8 +6728,8 @@ msgid ""
 "The size of a transaction log before rollover, and a new log is created. The "
 "default value is 16MB."
 msgstr ""
-"The size of a transaction log before rollover, and a new log is created. The "
-"default value is 16MB."
+"Dimensiunea unui log de tranzacții înainte de rollover și un nou log este "
+"creat. Valoarea implicită este de 16MB. "
 
 #: libraries/engines/pbxt.lib.php:42
 msgid "Transaction buffer size"
@@ -6709,12 +6740,13 @@ msgid ""
 "The size of the global transaction log buffer (the engine allocates 2 "
 "buffers of this size). The default is 1MB."
 msgstr ""
-"The size of the global transaction log buffer (the engine allocates 2 "
-"buffers of this size). The default is 1MB."
+"Dimensiunea tamponului global pentru jurnale de tranzacţii (engine-ul alocă "
+"2 tampoane de această dimensiune).Implicit este de 1MB."
 
 #: libraries/engines/pbxt.lib.php:47
+#, fuzzy
 msgid "Checkpoint frequency"
-msgstr "Checkpoint frequency"
+msgstr "Frecvența punctelor de control"
 
 #: libraries/engines/pbxt.lib.php:48
 msgid ""
@@ -6726,7 +6758,7 @@ msgstr ""
 
 #: libraries/engines/pbxt.lib.php:52
 msgid "Data log threshold"
-msgstr "Data log threshold"
+msgstr "Prag pentru jurnalul de date"
 
 #: libraries/engines/pbxt.lib.php:53
 msgid ""
@@ -6735,10 +6767,10 @@ msgid ""
 "value of this variable can be increased to increase the total amount of data "
 "that can be stored in the database."
 msgstr ""
-"The maximum size of a data log file. The default value is 64MB. PBXT can "
-"create a maximum of 32000 data logs, which are used by all tables. So the "
-"value of this variable can be increased to increase the total amount of data "
-"that can be stored in the database."
+"Mărimea maximă a unui fișier jurnal de date. Valoarea implicită este 64MB. "
+"PBXT poate crea maxim 32000 de jurnale de date, care sunt folosite de toate "
+"tabelele. Prin urmare, valoarea acestei variabile poate fi marită pentru a "
+"mări cantitatea totală de date care pot fi stocate în baza de date."
 
 #: libraries/engines/pbxt.lib.php:57
 msgid "Garbage threshold"

@@ -12,6 +12,10 @@
 require_once './libraries/common.inc.php';
 //require_once './libraries/display_import_functions.lib.php';
 
+if (isset($_REQUEST['show_as_php'])) {
+    $GLOBALS['show_as_php'] = $_REQUEST['show_as_php'];
+}
+
 // reset import messages for ajax request
 $_SESSION['Import_message']['message'] = null;
 $_SESSION['Import_message']['go_back_url'] = null;
@@ -245,6 +249,9 @@ if (strtolower(substr($memory_limit, -1)) == 'm') {
 $read_limit = $memory_limit / 8; // Just to be sure, there might be lot of memory needed for uncompression
 
 // handle filenames
+if (isset($_FILES['import_file'])) {
+    $import_file = $_FILES['import_file']['tmp_name'];
+}
 if (!empty($local_import_file) && !empty($cfg['UploadDir'])) {
 
     // sanitize $local_import_file as it comes from a POST

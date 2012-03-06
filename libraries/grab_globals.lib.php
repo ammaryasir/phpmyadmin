@@ -78,41 +78,13 @@ $_import_blacklist = array(
     //'/^PMA_.*$/i',      // other PMA variables
 );
 
-if (! empty($_GET)) {
-    PMA_recursive_extract($_GET, $GLOBALS);
-}
+//if (! empty($_GET)) {
+//    PMA_recursive_extract($_GET, $GLOBALS);
+//}
 
 if (! empty($_POST)) {
     PMA_recursive_extract($_POST, $GLOBALS);
 }
-
-if (! empty($_FILES)) {
-    $_valid_variables = preg_replace($GLOBALS['_import_blacklist'], '', array_keys($_FILES));
-    foreach ($_valid_variables as $name) {
-        if (strlen($name) != 0) {
-            $$name = $_FILES[$name]['tmp_name'];
-            ${$name . '_name'} = $_FILES[$name]['name'];
-        }
-    }
-    unset($name, $value);
-}
-
-/**
- * globalize some environment variables
- */
-$server_vars = array('HTTP_ACCEPT_LANGUAGE', 'HTTP_AUTHORIZATION');
-foreach ($server_vars as $current) {
-    // it's not important HOW we detect html tags
-    // it's more important to prevent XSS
-    // so it's not important if we result in an invalid string,
-    // it's even better than a XSS capable string
-    if (PMA_getenv($current) && false === strpos(PMA_getenv($current), '<')) {
-        $$current = PMA_getenv($current);
-    // already imported by register_globals?
-    } elseif (! isset($$current) || false !== strpos($$current, '<')) {
-        $$current = '';
-    }
-}
-unset($server_vars, $current, $_import_blacklist);
+unset($_import_blacklist);
 
 ?>

@@ -4,8 +4,8 @@ msgstr ""
 "Project-Id-Version: phpMyAdmin 3.5.0-beta2\n"
 "Report-Msgid-Bugs-To: phpmyadmin-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2012-02-14 16:01+0100\n"
-"PO-Revision-Date: 2012-02-13 00:03+0200\n"
-"Last-Translator: Rouslan Placella <rouslan@placella.com>\n"
+"PO-Revision-Date: 2012-02-28 18:33+0200\n"
+"Last-Translator: any anonymous user <>\n"
 "Language-Team: italian <it@li.org>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
@@ -1007,7 +1007,7 @@ msgid ""
 msgstr ""
 "Stai cercando di importare un file con un tipo di compressione (%s) non "
 "supportato. Il supporto per questo tipo di compressione potrebbe non essere "
-"ancora stato implementato oppure è disabilitato nelle configurazioni."
+"ancora stato implementato oppure è disabilitato nella tua configurazioni."
 
 #: import.php:349
 msgid ""
@@ -1086,15 +1086,15 @@ msgstr "Vuoi veramente "
 
 #: js/messages.php:31 libraries/mult_submits.inc.php:280 sql.php:339
 msgid "You are about to DESTROY a complete database!"
-msgstr "Si sta per DISTRUGGERE COMPLETAMENTE un intero database!"
+msgstr "Stai per DISTRUGGERE COMPLETAMENTE un intera base di dati!"
 
 #: js/messages.php:32
 msgid "You are about to DESTROY a complete table!"
-msgstr "Si sta per DISTRUGGERE COMPLETAMENTE un intera tabella!"
+msgstr "Stai per DISTRUGGERE COMPLETAMENTE un intera tabella!"
 
 #: js/messages.php:33
 msgid "You are about to TRUNCATE a complete table!"
-msgstr "Si sta per DISTRUGGERE COMPLETAMENTE il contenuto della tabella!"
+msgstr "Stai per TRONCARE COMPLETAMENTE il contenuto della tabella!"
 
 #: js/messages.php:35
 msgid "Deleting tracking data"
@@ -1441,10 +1441,9 @@ msgid "Remove chart"
 msgstr "Rimuovi il diagramma"
 
 #: js/messages.php:139
-#, fuzzy
 #| msgid "Edit labels and series"
 msgid "Edit title and labels"
-msgstr "Modifica titoli ed etichette"
+msgstr "Modifica titolo ed etichette"
 
 #: js/messages.php:140
 msgid "Add chart to grid"
@@ -1572,14 +1571,14 @@ msgid "Differential"
 msgstr "Differenziali"
 
 #: js/messages.php:171
-#, fuzzy, php-format
+#, php-format
 #| msgid "Divided by %s:"
 msgid "Divided by %s"
-msgstr "Diviso per %s:"
+msgstr "Diviso per %s"
 
 #: js/messages.php:172
 msgid "Unit"
-msgstr ""
+msgstr "Unità"
 
 #: js/messages.php:174
 msgid "From slow log"
@@ -1596,13 +1595,11 @@ msgstr ""
 "richiedere del tempo."
 
 #: js/messages.php:177
-#, fuzzy
 #| msgid "Read requests"
 msgid "Cancel request"
-msgstr "Richieste di lettura"
+msgstr "Annulla la richiesta"
 
 #: js/messages.php:178
-#, fuzzy
 #| msgid ""
 #| "olumns shows the amount of identical queries that are grouped ether. ever "
 #| "only the SQL Text is being compared, thus the queries er attributes h as "
@@ -1614,7 +1611,7 @@ msgid ""
 msgstr ""
 "Questo campo mostra il numero di query identiche raggruppate. Tuttavia il "
 "raggruppamento è fatto in base al testo che costituisce la query SQL, quindi "
-"altri attributi, come lo 'start time', potrebbero essere diversi."
+"altri attributi, come lo start time, potrebbero essere diversi."
 
 #: js/messages.php:179
 msgid ""
@@ -1635,24 +1632,22 @@ msgid "Jump to Log table"
 msgstr "Vai alla tabella di Log"
 
 #: js/messages.php:183
-#, fuzzy
 #| msgid "Log analysed, but not data found in this time span."
 msgid "Log analysed, but no data found in this time span."
 msgstr ""
-"Il log é stato analizzato, nessun dato é stato trovato per questo intervallo "
-"di tempo."
+"Il log é stato analizzato, ma nessun dato é stato trovato per questo "
+"intervallo di tempo."
 
 #: js/messages.php:185
-#, fuzzy
 #| msgid "Analyze"
 msgid "Analyzing..."
-msgstr "Analizza"
+msgstr "Analisi in corso..."
 
 #: js/messages.php:186
 #, fuzzy
 #| msgid "Explain SQL"
 msgid "Explain output"
-msgstr "Spiega SQL"
+msgstr "Spiega output"
 
 #: js/messages.php:188 js/messages.php:494 libraries/rte/rte_list.lib.php:62
 #: server_status.php:1241 sql.php:901
@@ -1660,10 +1655,9 @@ msgid "Time"
 msgstr "Tempo"
 
 #: js/messages.php:189
-#, fuzzy
 #| msgid "Total:"
 msgid "Total time:"
-msgstr "Totale:"
+msgstr "Tempo totale:"
 
 #: js/messages.php:190
 #, fuzzy
@@ -1679,9 +1673,8 @@ msgid "Table"
 msgstr "Tabella"
 
 #: js/messages.php:192
-#, fuzzy
 msgid "Chart"
-msgstr "Set di caratteri"
+msgstr "Grafico"
 
 #. l10n: A collection of available filters
 #: js/messages.php:195
@@ -1740,12 +1733,11 @@ msgid "Affected rows:"
 msgstr "Righe coinvolte:"
 
 #: js/messages.php:210
-#, fuzzy
 #| msgid "Failed parsing config file. It doesn't seem to be valid JSON code"
 msgid "Failed parsing config file. It doesn't seem to be valid JSON code."
 msgstr ""
-"La lettura del file di configurazione é fallita. Non sembra essere codice "
-"JSON valido"
+"L'analisi del file di configurazione é fallita. Non sembra essere codice "
+"JSON valido."
 
 #: js/messages.php:211
 msgid ""
@@ -1767,10 +1759,9 @@ msgid "Analyse Query"
 msgstr "Analizza la Query"
 
 #: js/messages.php:218
-#, fuzzy
 #| msgid "Apply a divisor"
 msgid "Advisor system"
-msgstr "Applica un divisore"
+msgstr "Advisor"
 
 #: js/messages.php:219
 msgid "Possible performance issues"
@@ -1953,8 +1944,9 @@ msgid "Each point represents a data row."
 msgstr "Ogni punto rappresenta una riga dei dati."
 
 #: js/messages.php:295
+#, fuzzy
 msgid "Hovering over a point will show its label."
-msgstr ""
+msgstr "Passando il mouse su un punto mostrerà la sua etichetta."
 
 #: js/messages.php:297
 msgid "Use mousewheel to zoom in or out of the plot."
@@ -1983,6 +1975,7 @@ msgstr ""
 #: js/messages.php:307
 msgid "Strings are converted into integer for plotting"
 msgstr ""
+"Le stringhe verranno convertite a numeri interi per tracciare il grafico"
 
 #: js/messages.php:309
 msgid "Select two columns"
@@ -1993,10 +1986,9 @@ msgid "Select two different columns"
 msgstr "Seleziona due campi diversi"
 
 #: js/messages.php:311
-#, fuzzy
 #| msgid "Query results operations"
 msgid "Query results"
-msgstr "Operazioni sui risultati della query"
+msgstr "Risultati della query"
 
 #: js/messages.php:312
 msgid "Data point content"
@@ -2073,10 +2065,14 @@ msgstr ""
 "Clicca sulla freccia<br />per cambiare lo stato di visualizzazzione dei campi"
 
 #: js/messages.php:351
+#, fuzzy
 msgid ""
 "This table does not contain a unique column. Features related to the grid "
 "edit, checkbox, Edit, Copy and Delete links may not work after saving."
 msgstr ""
+"Questa tabella non contiene una colonna unica. Funzionalità relative alla "
+"modifica, copia ed eliminazione potrebbero non funzionare dopo il "
+"salvataggio."
 
 #: js/messages.php:352
 msgid ""
@@ -2363,7 +2359,7 @@ msgstr "Sett"
 #. l10n: Month-year order for calendar, use either "calendar-month-year" or "calendar-year-month".
 #: js/messages.php:484
 msgid "calendar-month-year"
-msgstr ""
+msgstr "calendar-month-year"
 
 #. l10n: Year suffix for calendar, "none" is empty.
 #: js/messages.php:486
@@ -2389,6 +2385,8 @@ msgstr "Secondo"
 #, php-format
 msgid "Failed formatting string for rule '%s'. PHP threw following error: %s"
 msgstr ""
+"Formattazione della stringa non riuscita per regola '%s'. PHP ha prodotto il "
+"seguente errore: %s"
 
 #: libraries/Advisor.class.php:326 server_status.php:952
 msgid "per second"
@@ -2405,7 +2403,7 @@ msgstr "all'ora"
 
 #: libraries/Advisor.class.php:335
 msgid "per day"
-msgstr ""
+msgstr "al giorno"
 
 #: libraries/Config.class.php:703
 msgid "Remove \"./config\" directory before using phpMyAdmin!"
@@ -2414,7 +2412,7 @@ msgstr "Rimuovi la cartella \"./config\" prima di utilizzare phpMyAdmin!"
 #: libraries/Config.class.php:727
 #, php-format
 msgid "Existing configuration file (%s) is not readable."
-msgstr ""
+msgstr "File di configurazione esistente (%s) non è leggibile."
 
 #: libraries/Config.class.php:752
 msgid "Wrong permissions on configuration file, should not be world writable!"
@@ -2428,7 +2426,7 @@ msgstr "Dimensione font"
 
 #: libraries/Error_Handler.class.php:62
 msgid "Too many error messages, some are not displayed."
-msgstr ""
+msgstr "Troppi errori, alcuni messaggi non verranno visualizzati."
 
 #: libraries/File.class.php:221
 msgid "File was not an uploaded file."
@@ -3085,19 +3083,17 @@ msgstr "Precedente"
 #: libraries/common.lib.php:2485 libraries/common.lib.php:2488
 #: libraries/display_tbl.lib.php:373 server_binlog.php:170
 #: server_binlog.php:172
-#, fuzzy
 #| msgid "Next"
 msgctxt "Next page"
 msgid "Next"
-msgstr "Prossimo"
+msgstr "Prossima"
 
 #: libraries/common.lib.php:2486 libraries/common.lib.php:2489
 #: libraries/display_tbl.lib.php:390
-#, fuzzy
 #| msgid "End"
 msgctxt "Last page"
 msgid "End"
-msgstr "Fine"
+msgstr "Ultima"
 
 #: libraries/common.lib.php:2556
 #, php-format
@@ -4676,7 +4672,7 @@ msgstr "Mostra il pulsante della guida"
 
 #: libraries/config/messages.inc.php:359
 msgid "Save all edited cells at once"
-msgstr ""
+msgstr "Salva tutte le celle modificate"
 
 #: libraries/config/messages.inc.php:360
 msgid "Directory where exports can be saved on server"
@@ -5599,10 +5595,9 @@ msgid "Could not initialize Drizzle connection library"
 msgstr ""
 
 #: libraries/config/validate.lib.php:205 libraries/config/validate.lib.php:212
-#, fuzzy
 #| msgid "Could not connect to MySQL server"
 msgid "Could not connect to Drizzle server"
-msgstr "Impossibile effettuare la connessione al server MySQL"
+msgstr "Impossibile effettuare la connessione al server Drizzle"
 
 #: libraries/config/validate.lib.php:223 libraries/config/validate.lib.php:230
 msgid "Could not connect to MySQL server"
@@ -6028,10 +6023,9 @@ msgid "Language"
 msgstr "Lingua"
 
 #: libraries/display_tbl.lib.php:406
-#, fuzzy
 #| msgid "Save directory"
 msgid "Save edited data"
-msgstr "Salva cartella"
+msgstr "Salva i dati modificati"
 
 #: libraries/display_tbl.lib.php:412
 msgid "Restore column order"
@@ -6117,10 +6111,9 @@ msgid "Show BLOB contents"
 msgstr "Mostra contenuti BLOB"
 
 #: libraries/display_tbl.lib.php:687
-#, fuzzy
 #| msgid "Browser transformation"
 msgid "Hide browser transformation"
-msgstr "Trasformazione del browser"
+msgstr "Nascondi le trasformazioni del browser"
 
 #: libraries/display_tbl.lib.php:694
 #, fuzzy
@@ -6963,8 +6956,9 @@ msgid "No data found for GIS visualization."
 msgstr "Nessun data trovato per la visualizzazione GIS."
 
 #: libraries/header_http.inc.php:15 libraries/header_meta_style.inc.php:15
+#, fuzzy
 msgid "GLOBALS overwrite attempt"
-msgstr ""
+msgstr "Tentativo di sovrascrivere GLOBALS"
 
 #: libraries/header_printview.inc.php:49 libraries/header_printview.inc.php:57
 msgid "SQL result"
@@ -7008,10 +7002,10 @@ msgid "Go to database: %s"
 msgstr "Vai al database: %s"
 
 #: libraries/import.lib.php:1109 libraries/import.lib.php:1132
-#, fuzzy, php-format
+#, php-format
 #| msgid "Missing data for %s"
 msgid "Edit settings for %s"
-msgstr "Dati mancanti per %s"
+msgstr "Modifica impostazioni per %s"
 
 #: libraries/import.lib.php:1127
 #, php-format
@@ -7126,6 +7120,8 @@ msgid ""
 "You tried to import an invalid file or the imported file contains invalid "
 "data"
 msgstr ""
+"Hai cercato di importare un file non valido o il file importato contiene "
+"dati non validi"
 
 #: libraries/import/shp.php:338
 #, php-format
@@ -8164,10 +8160,9 @@ msgid "Current Server"
 msgstr "Server corrente"
 
 #: libraries/server_links.inc.php:60
-#, fuzzy
 #| msgid "User"
 msgid "Users"
-msgstr "Utente"
+msgstr "Utenti"
 
 #: libraries/server_links.inc.php:79 server_synchronize.php:1154
 #: server_synchronize.php:1162
@@ -8191,7 +8186,7 @@ msgstr "Set di caratteri"
 #: libraries/server_links.inc.php:104 server_plugins.php:47
 #: server_plugins.php:80
 msgid "Plugins"
-msgstr ""
+msgstr "Plugin"
 
 #: libraries/server_links.inc.php:108
 msgid "Engines"
@@ -8470,16 +8465,14 @@ msgid "Operator"
 msgstr "Operatore"
 
 #: libraries/tbl_select.lib.php:103
-#, fuzzy
 #| msgid "Search"
 msgid "Table Search"
-msgstr "Cerca"
+msgstr "Ricerca nella Tabella"
 
 #: libraries/tbl_select.lib.php:175 tbl_change.php:1000
-#, fuzzy
 #| msgid "Insert"
 msgid "Edit/Insert"
-msgstr "Inserisci"
+msgstr "Modifica/Inserisci"
 
 #: libraries/transformations/application_octetstream__download.inc.php:10
 msgid ""
@@ -8661,10 +8654,9 @@ msgid "General Settings"
 msgstr "Impostazioni Generali"
 
 #: main.php:109
-#, fuzzy
 #| msgid "MySQL connection collation"
 msgid "Server connection collation"
-msgstr "Collation della connessione di MySQL"
+msgstr "Collation della connessione del server"
 
 #: main.php:124
 msgid "Appearance Settings"
@@ -8678,17 +8670,16 @@ msgstr "Ulteriori impostazioni"
 #, fuzzy
 #| msgid "Database for user"
 msgid "Database server"
-msgstr "Database per l'utente"
+msgstr "Server del Database"
 
 #: main.php:172
 msgid "Software"
-msgstr ""
+msgstr "Software"
 
 #: main.php:173
-#, fuzzy
 #| msgid "Show versions"
 msgid "Software version"
-msgstr "Mostra versioni"
+msgstr "Versione software"
 
 #: main.php:175
 msgid "Protocol version"
@@ -9209,7 +9200,7 @@ msgstr "Visualizza il dump (schema) dei databases"
 
 #: server_plugins.php:81
 msgid "Modules"
-msgstr ""
+msgstr "Moduli"
 
 #: server_plugins.php:102
 msgid "Begin"
@@ -9217,11 +9208,11 @@ msgstr "Inizio"
 
 #: server_plugins.php:111
 msgid "Plugin"
-msgstr ""
+msgstr "Plugin"
 
 #: server_plugins.php:112 server_plugins.php:146
 msgid "Module"
-msgstr ""
+msgstr "Modulo"
 
 #: server_plugins.php:113 server_plugins.php:148
 msgid "Library"
@@ -9233,11 +9224,11 @@ msgstr "Versione"
 
 #: server_plugins.php:115 server_plugins.php:150
 msgid "Author"
-msgstr ""
+msgstr "Autore"
 
 #: server_plugins.php:116 server_plugins.php:151
 msgid "License"
-msgstr ""
+msgstr "Licenza"
 
 #: server_plugins.php:182
 msgid "disabled"
@@ -9981,10 +9972,9 @@ msgid "Run analyzer"
 msgstr "Tipo di query"
 
 #: server_status.php:902
-#, fuzzy
 #| msgid "Introduction"
 msgid "Instructions"
-msgstr "Introduzione"
+msgstr "Introduzioni"
 
 #: server_status.php:909
 msgid ""
@@ -10834,10 +10824,9 @@ msgid ""
 msgstr ""
 
 #: server_status.php:1600
-#, fuzzy
 #| msgid "Restore default value"
 msgid "Reset to default"
-msgstr "Ripristinare valori predefiniti"
+msgstr "Ripristina i valori predefiniti"
 
 #: server_status.php:1604
 msgid "Monitor Instructions"
