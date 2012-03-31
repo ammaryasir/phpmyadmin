@@ -61,18 +61,20 @@ function PMA_getColumnOrder()
  * of databases from server_databases.php (which can be modified by
  * db_create.php)
  *
- * @param array $current
+ * @param array   $current
  * @param boolean $is_superuser
- * @param string $checkall
- * @param string $url_query
- * @param array $column_order
- * @param array $replication_types
- * @param array $replication_info
+ * @param string  $checkall
+ * @param string  $url_query
+ * @param array   $column_order
+ * @param array   $replication_types
+ * @param array   $replication_info
  *
  * @return array $column_order, $out
  */
-function PMA_buildHtmlForDb($current, $is_superuser, $checkall, $url_query, $column_order, $replication_types, $replication_info)
-{
+function PMA_buildHtmlForDb(
+    $current, $is_superuser, $checkall, $url_query,
+    $column_order, $replication_types, $replication_info
+) {
 
     $out = '';
     if ($is_superuser || $GLOBALS['cfg']['AllowUserDropDatabase']) {
@@ -146,7 +148,7 @@ function PMA_buildHtmlForDb($current, $is_superuser, $checkall, $url_query, $col
         $out .= '<td class="tool">'
                . '<a onclick="'
                . 'if (window.parent.setDb) window.parent.setDb(\'' . PMA_jsFormat($current['SCHEMA_NAME']) . '\');'
-               . '" href="./server_privileges.php?' . $url_query
+               . '" href="server_privileges.php?' . $url_query
                . '&amp;checkprivs=' . urlencode($current['SCHEMA_NAME'])
                . '" title="' . sprintf(__('Check privileges for database &quot;%s&quot;.'), htmlspecialchars($current['SCHEMA_NAME']))
                . '">'

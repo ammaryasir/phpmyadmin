@@ -46,13 +46,14 @@ if ($is_select) {
         $table = $analyzed_sql[0]['table_ref'][0]['table_true_name'];
     }
     if (isset($analyzed_sql[0]['table_ref'][0]['db'])
-      && strlen($analyzed_sql[0]['table_ref'][0]['db'])) {
+        && strlen($analyzed_sql[0]['table_ref'][0]['db'])
+    ) {
         $db    = $analyzed_sql[0]['table_ref'][0]['db'];
     } else {
         $db = $prev_db;
     }
     // Nijel: don't change reload, if we already decided to reload in import
-    if (empty($reload)) {
+    if (empty($reload) && empty($GLOBALS['is_ajax_request'])) {
         $reload  = ($db == $prev_db) ? 0 : 1;
     }
 }

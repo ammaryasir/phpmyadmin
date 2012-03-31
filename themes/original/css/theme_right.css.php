@@ -155,6 +155,30 @@ button {
     margin-<?php echo $right; ?>: 1em;
 }
 
+th.left, td.left {
+    text-align: left;
+}
+
+th.center, td.center {
+    text-align: center;
+}
+
+th.right, td.right {
+    text-align: right;
+}
+
+tr.vtop, th.vtop, td.vtop {
+    vertical-align: top;
+}
+
+tr.vmiddle, th.vmiddle, td.vmiddle {
+    vertical-align: middle;
+}
+
+tr.vbottom, th.vbottom, td.vbottom {
+    vertical-align: bottom;
+}
+
 .paddingtop {
     padding-top: 1em;
 }
@@ -1739,6 +1763,13 @@ hr.enum_editor_no_js {
 }
 
 /**
+ * Create table styles
+ */
+#create_table_form table.table-name td {
+    vertical-align: middle;
+}
+
+/**
  * Table structure styles
  */
 .structure_actions_dropdown {
@@ -3028,6 +3059,12 @@ h2.active {
     padding-top:10px;
     color: black;
     font-weight: normal;
+}
+ 
+#foreignkeychk {
+    align:left;
+    position:absolute;
+    cursor:pointer;
 }
 
 input.btn {

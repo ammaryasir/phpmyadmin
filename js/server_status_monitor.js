@@ -250,7 +250,7 @@ $(function() {
         }
 
         // Icon graphics have zIndex 19, 20 and 21. Let's just hope nothing else has the same zIndex
-        $('table#chartGrid div svg').find('*[zIndex=20], *[zIndex=21], *[zIndex=19]').toggle(editMode)
+        $('table#chartGrid div svg').find('*[zIndex=20], *[zIndex=21], *[zIndex=19]').toggle(editMode);
 
         $('a[href="#endChartEditMode"]').toggle(editMode);
 
@@ -564,7 +564,7 @@ $(function() {
         
         dlgBtns[PMA_messages['strCancel']] = function() {
             $(this).dialog('close');
-        }
+        };
         
         
         $('div#emptyDialog').dialog({
@@ -888,7 +888,7 @@ $(function() {
                     - $('table#chartGrid td:nth-child(1)').offset().left,
             height: $('table#chartGrid tr:nth-child(2) td:nth-child(2)').offset().top 
                     - $('table#chartGrid tr:nth-child(1) td:nth-child(1)').offset().top
-        }
+        };
         $('table#chartGrid').html('');
         
         /* Add all charts - in correct order */
@@ -973,7 +973,7 @@ $(function() {
         return {
             width: wdt,
             height: 0.75 * wdt
-        }
+        };
     }
 
     /* Adds a chart to the chart grid */
@@ -1093,7 +1093,7 @@ $(function() {
         }
 
         // Edit, Print icon only in edit mode
-        $('table#chartGrid div svg').find('*[zIndex=20], *[zIndex=21], *[zIndex=19]').toggle(editMode)
+        $('table#chartGrid div svg').find('*[zIndex=20], *[zIndex=21], *[zIndex=19]').toggle(editMode);
 
         runtime.chartAI++;
     }
@@ -1348,7 +1348,7 @@ $(function() {
             }
 
             $(this).dialog("close");
-        }
+        };
 
         $('#emptyDialog').dialog({
             width: 'auto',
@@ -1581,7 +1581,7 @@ $(function() {
             $('div#logTable table tfoot tr')
                 .html('<th colspan="' + (runtime.logDataCols.length - 1) + '">' +
                       PMA_messages['strSumRows'] + ' ' + rowSum + '<span style="float:right">' +
-                      PMA_messages['strTotal'] + '</span></th><th align="right">' + totalSum + '</th>');
+                      PMA_messages['strTotal'] + '</span></th><th class="right">' + totalSum + '</th>');
         }
     }
 
@@ -1615,7 +1615,7 @@ $(function() {
     function buildLogTable(data) {
         var rows = data.rows;
         var cols = new Array();
-        var $table = $('<table border="0" class="sortable"></table>');
+        var $table = $('<table class="sortable"></table>');
         var $tBody, $tRow, $tCell;
 
         $('#logTable').html($table);
@@ -1658,7 +1658,7 @@ $(function() {
         $table.append('<tfoot>' +
                     '<tr><th colspan="' + (cols.length - 1) + '">' + PMA_messages['strSumRows'] +
                     ' ' + data.numRows + '<span style="float:right">' + PMA_messages['strTotal'] +
-                    '</span></th><th align="right">' + data.sum.TOTAL + '</th></tr></tfoot>');
+                    '</span></th><th class="right">' + data.sum.TOTAL + '</th></tr></tfoot>');
 
         // Append a tooltip to the count column, if there exist one
         if ($('#logTable th:last').html() == '#') {
@@ -1679,7 +1679,7 @@ $(function() {
 
                 },
                 hide: { delay: 1000 }
-            })
+            });
         }
 
         $('div#logTable table').tablesorter({
@@ -1702,7 +1702,7 @@ $(function() {
         codemirror_editor.setValue(query);
         // Codemirror is bugged, it doesn't refresh properly sometimes. Following lines seem to fix that
         setTimeout(function() {
-            codemirror_editor.refresh()
+            codemirror_editor.refresh();
         },50);
 
         var profilingChart = null;

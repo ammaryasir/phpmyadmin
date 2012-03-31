@@ -432,7 +432,7 @@ function PMA_showMySQLDocu($chapter, $link, $big_icon = false, $anchor = '', $ju
             $link = 'index';
         }
         $url = $cfg['MySQLManualBase'] . '/' . $link . '.html';
-        if (!empty($anchor)) {
+        if (! empty($anchor)) {
             $url .= '#' . $anchor;
         }
         break;
@@ -459,7 +459,7 @@ function PMA_showMySQLDocu($chapter, $link, $big_icon = false, $anchor = '', $ju
             }
         }
         $url = $cfg['MySQLManualBase'] . '/' . $mysql . '/' . $lang . '/' . $link . '.html';
-        if (!empty($anchor)) {
+        if (! empty($anchor)) {
             $url .= '#' . $anchor;
         }
         break;
@@ -578,9 +578,10 @@ function PMA_showHint($message, $bbcode = false, $type = 'notice')
  *
  * @access  public
  */
-function PMA_mysqlDie($error_message = '', $the_query = '',
-$is_modify_link = true, $back_url = '', $exit = true)
-{
+function PMA_mysqlDie(
+    $error_message = '', $the_query = '',
+    $is_modify_link = true, $back_url = '', $exit = true
+) {
     global $table, $db;
 
     /**
@@ -590,15 +591,15 @@ $is_modify_link = true, $back_url = '', $exit = true)
 
     $error_msg_output = '';
 
-    if (!$error_message) {
+    if (! $error_message) {
         $error_message = PMA_DBI_getError();
     }
-    if (!$the_query && !empty($GLOBALS['sql_query'])) {
+    if (! $the_query && ! empty($GLOBALS['sql_query'])) {
         $the_query = $GLOBALS['sql_query'];
     }
 
     // --- Added to solve bug #641765
-    if (!function_exists('PMA_SQP_isError') || PMA_SQP_isError()) {
+    if (! function_exists('PMA_SQP_isError') || PMA_SQP_isError()) {
         $formatted_sql = htmlspecialchars($the_query);
     } elseif (empty($the_query) || trim($the_query) == '') {
         $formatted_sql = '';
@@ -615,7 +616,7 @@ $is_modify_link = true, $back_url = '', $exit = true)
     // if the config password is wrong, or the MySQL server does not
     // respond, do not show the query that would reveal the
     // username/password
-    if (!empty($the_query) && !strstr($the_query, 'connect')) {
+    if (! empty($the_query) && ! strstr($the_query, 'connect')) {
         // --- Added to solve bug #641765
         if (function_exists('PMA_SQP_isError') && PMA_SQP_isError()) {
             $error_msg_output .= PMA_SQP_getErrorString() . "\n";
@@ -822,6 +823,7 @@ function PMA_getTableList($db, $tables = null, $limit_offset = 0, $limit_count =
         if ($GLOBALS['cfg']['ShowTooltipAliasTB']
             && $GLOBALS['cfg']['ShowTooltipAliasTB'] !== 'nested'
             && $table['Comment'] // do not switch if the comment is empty
+            && $table['Comment'] != 'VIEW' // happens in MySQL 5.1
         ) {
             // switch tooltip and name
             $table['disp_name'] = $table['Comment'];
@@ -894,8 +896,8 @@ function PMA_backquote($a_name, $do_it = true)
  *
  * </code>
  *
- * @param mixed   $a_name the "backquoted" database, table or field name
- *                        or array of it
+ * @param mixed $a_name the "backquoted" database, table or field name
+ *                      or array of it
  *
  * @return  mixed    the "backquoted" database, table or field name
  *
@@ -929,7 +931,7 @@ function PMA_removeBackquote($a_name)
  */
 function PMA_whichCrlf()
 {
-    // The 'PMA_USR_OS' constant is defined in "./libraries/Config.class.php"
+    // The 'PMA_USR_OS' constant is defined in "libraries/Config.class.php"
     // Win case
     if (PMA_USR_OS == 'Win') {
         $the_crlf = "\r\n";
@@ -945,6 +947,8 @@ function PMA_whichCrlf()
  * Reloads navigation if needed.
  *
  * @param bool $jsonly prints out pure JavaScript
+ *
+ * @return void
  *
  * @access  public
  */
@@ -1042,7 +1046,7 @@ function PMA_showMessage($message, $sql_query = null, $type = 'notice', $is_view
     if (strlen($GLOBALS['table'])
         && $GLOBALS['sql_query'] == 'TRUNCATE TABLE ' . PMA_backquote($GLOBALS['table'])
     ) {
-        if (PMA_Table::sGetStatusInfo($GLOBALS['db'], $GLOBALS['table'], 'Index_length') > 1024 && !PMA_DRIZZLE) {
+        if (PMA_Table::sGetStatusInfo($GLOBALS['db'], $GLOBALS['table'], 'Index_length') > 1024 && ! PMA_DRIZZLE) {
             PMA_DBI_try_query('REPAIR TABLE ' . PMA_backquote($GLOBALS['table']));
         }
     }
@@ -1050,8 +1054,8 @@ function PMA_showMessage($message, $sql_query = null, $type = 'notice', $is_view
 
     // In an Ajax request, $GLOBALS['cell_align_left'] may not be defined. Hence,
     // check for it's presence before using it
-    echo '<div id="result_query" align="'
-        . ( isset($GLOBALS['cell_align_left']) ? $GLOBALS['cell_align_left'] : '' )
+    echo '<div id="result_query" '
+        . ( isset($GLOBALS['cell_align_left']) ? 'style="text-align: ' . $GLOBALS['cell_align_left'] . '" ' : '' )
         . '">' . "\n";
 
     if ($message instanceof PMA_Message) {
@@ -1117,6 +1121,7 @@ function PMA_showMessage($message, $sql_query = null, $type = 'notice', $is_view
             ) {
                 $query_base = $analyzed_display_query[0]['section_before_limit']
                     . "\n" . $GLOBALS['sql_order_to_append']
+                    . $analyzed_display_query[0]['limit_clause'] . ' '
                     . $analyzed_display_query[0]['section_after_limit'];
 
                 // Need to reparse query
@@ -1267,7 +1272,7 @@ function PMA_showMessage($message, $sql_query = null, $type = 'notice', $is_view
             && ! empty($cfg['SQLQuery']['Validate'])
         ) {
             $validate_params = $url_params;
-            if (!empty($GLOBALS['validatequery'])) {
+            if (! empty($GLOBALS['validatequery'])) {
                 $validate_message = __('Skip Validate SQL');
             } else {
                 $validate_params['validatequery'] = 1;
@@ -1280,7 +1285,7 @@ function PMA_showMessage($message, $sql_query = null, $type = 'notice', $is_view
             $validate_link = '';
         } //validator
 
-        if (!empty($GLOBALS['validatequery'])) {
+        if (! empty($GLOBALS['validatequery'])) {
             echo '<div class="sqlvalidate">';
         } else {
             echo '<code class="sql">';
@@ -1295,7 +1300,7 @@ function PMA_showMessage($message, $sql_query = null, $type = 'notice', $is_view
         if (! empty($GLOBALS['show_as_php'])) {
             echo '";';
         }
-        if (!empty($GLOBALS['validatequery'])) {
+        if (! empty($GLOBALS['validatequery'])) {
             echo '</div>';
         } else {
             echo '</code>';
@@ -1511,9 +1516,10 @@ function PMA_localizeNumber($value)
  *
  * @access  public
  */
-function PMA_formatNumber($value, $digits_left = 3, $digits_right = 0,
-$only_down = false, $noTrailingZero = true)
-{
+function PMA_formatNumber(
+    $value, $digits_left = 3, $digits_right = 0,
+    $only_down = false, $noTrailingZero = true
+) {
     if ($value==0) {
         return '0';
     }
@@ -1701,14 +1707,15 @@ function PMA_localisedDate($timestamp = -1, $format = '')
  * returns a tab for tabbed navigation.
  * If the variables $link and $args ar left empty, an inactive tab is created
  *
- * @param array $tab        array with all options
- * @param array $url_params
+ * @param array  $tab        array with all options
+ * @param array  $url_params
+ * @param string $base_dir
  *
  * @return  string  html code for one tab, a link if valid otherwise a span
  *
  * @access  public
  */
-function PMA_generate_html_tab($tab, $url_params = array(), $base_dir='')
+function PMA_generate_html_tab($tab, $url_params = array(), $base_dir = '')
 {
     // default values
     $defaults = array(
@@ -1739,7 +1746,7 @@ function PMA_generate_html_tab($tab, $url_params = array(), $base_dir='')
         }
     }
 
-    if (!empty($tab['warning'])) {
+    if (! empty($tab['warning'])) {
         $tab['class'] .= ' error';
         $tab['attr'] .= ' title="' . htmlspecialchars($tab['warning']) . '"';
     }
@@ -1751,7 +1758,7 @@ function PMA_generate_html_tab($tab, $url_params = array(), $base_dir='')
     }
 
     // build the link
-    if (!empty($tab['link'])) {
+    if (! empty($tab['link'])) {
         $tab['link'] = htmlentities($tab['link']);
         $tab['link'] = $tab['link'] . PMA_generate_common_url($url_params);
         if (! empty($tab['args'])) {
@@ -1788,7 +1795,7 @@ function PMA_generate_html_tab($tab, $url_params = array(), $base_dir='')
     $id_string = ( empty($tab['id']) ? '' : ' id="'.$tab['id'].'" ' );
     $out = '<li' . ($tab['class'] == 'active' ? ' class="active"' : '') . '>';
 
-    if (!empty($tab['link'])) {
+    if (! empty($tab['link'])) {
         $out .= '<a class="tab' . htmlentities($tab['class']) . '"'
             .$id_string
             .' href="' . $tab['link'] . '" ' . $tab['attr'] . '>'
@@ -1812,7 +1819,7 @@ function PMA_generate_html_tab($tab, $url_params = array(), $base_dir='')
  *
  * @return  string  html-code for tab-navigation
  */
-function PMA_generate_html_tabs($tabs, $url_params, $base_dir='', $menu_id='topmenu')
+function PMA_generate_html_tabs($tabs, $url_params, $base_dir = '', $menu_id = 'topmenu')
 {
     $tab_navigation = '<div id="' . htmlentities($menu_id) . 'container" class="menucontainer">'
         .'<ul id="' . htmlentities($menu_id) . '">';
@@ -1846,8 +1853,8 @@ function PMA_generate_html_tabs($tabs, $url_params, $base_dir='', $menu_id='topm
  * @return string  the results to be echoed or saved in an array
  */
 function PMA_linkOrButton($url, $message, $tag_params = array(),
-    $new_form = true, $strip_img = false, $target = '')
-{
+    $new_form = true, $strip_img = false, $target = ''
+) {
     $url_length = strlen($url);
     // with this we should be able to catch case of image upload
     // into a (MEDIUM) BLOB; not worth generating even a form for these
@@ -1859,7 +1866,7 @@ function PMA_linkOrButton($url, $message, $tag_params = array(),
     if (! is_array($tag_params)) {
         $tmp = $tag_params;
         $tag_params = array();
-        if (!empty($tmp)) {
+        if (! empty($tmp)) {
             $tag_params['onclick'] = 'return confirmLink(this, \'' . PMA_escapeJsString($tmp) . '\')';
         }
         unset($tmp);
@@ -2040,7 +2047,7 @@ function PMA_flipstring($string, $Separator = "<br />\n")
         if ($char == '&') {
             $format_string .= $charbuff;
             $charbuff = $char;
-        } elseif ($char == ';' && !empty($charbuff)) {
+        } elseif ($char == ';' && ! empty($charbuff)) {
             $format_string .= $charbuff . $char;
             $charbuff = false;
             $append = true;
@@ -2073,6 +2080,8 @@ function PMA_flipstring($string, $Separator = "<br />\n")
  *                       (Set this manually to false in the calling script
  *                       until you know all needed parameters to check).
  * @param bool  $request Whether to include this list in checking for special params.
+ *
+ * @return void
  *
  * @global  string  path to current script
  * @global  boolean flag whether any special variable was required
@@ -2212,7 +2221,7 @@ function PMA_getUniqueCondition($handle, $fields_cnt, $fields_meta, $row, $force
             } elseif (($meta->type == 'blob' || $meta->type == 'string')
                 // hexify only if this is a true not empty BLOB or a BINARY
                     && stristr($field_flags, 'BINARY')
-                    && !empty($row[$i])) {
+                    && ! empty($row[$i])) {
                 // do not waste memory building a too big condition
                 if (strlen($row[$i]) < 1000) {
                     // use a CAST if possible, to avoid problems
@@ -2284,8 +2293,8 @@ function PMA_getUniqueCondition($handle, $fields_cnt, $fields_meta, $row, $force
  * @access  public
  */
 function PMA_buttonOrImage($button_name, $button_class, $image_name, $text,
-    $image, $value = '')
-{
+    $image, $value = ''
+) {
     if ($value == '') {
         $value = $text;
     }
@@ -2337,8 +2346,8 @@ function PMA_buttonOrImage($button_name, $button_class, $image_name, $text,
  */
 function PMA_pageselector($rows, $pageNow = 1, $nbTotalPage = 1,
     $showAll = 200, $sliceStart = 5, $sliceEnd = 5, $percent = 20,
-    $range = 10, $prompt = '')
-{
+    $range = 10, $prompt = ''
+) {
     $increment = floor($nbTotalPage / $percent);
     $pageNowMinusRange = ($pageNow - $range);
     $pageNowPlusRange = ($pageNow + $range);
@@ -2394,20 +2403,20 @@ function PMA_pageselector($rows, $pageNow = 1, $nbTotalPage = 1,
             }
         }
 
-/*
-    Add page numbers with "geometrically increasing" distances.
+        /*
+        Add page numbers with "geometrically increasing" distances.
 
-    This helps me a lot when navigating through giant tables.
+        This helps me a lot when navigating through giant tables.
 
-    Test case: table with 2.28 million sets, 76190 pages. Page of interest is
-    between 72376 and 76190.
-    Selecting page 72376.
-    Now, old version enumerated only +/- 10 pages around 72376 and the
-    percentage increment produced steps of about 3000.
+        Test case: table with 2.28 million sets, 76190 pages. Page of interest is
+        between 72376 and 76190.
+        Selecting page 72376.
+        Now, old version enumerated only +/- 10 pages around 72376 and the
+        percentage increment produced steps of about 3000.
 
-    The following code adds page numbers +/- 2,4,8,16,32,64,128,256 etc.
-    around the current page.
-*/
+        The following code adds page numbers +/- 2,4,8,16,32,64,128,256 etc.
+        around the current page.
+        */
 
         $i = $pageNow;
         $dist = 1;
@@ -2500,7 +2509,7 @@ function PMA_listNavigator($count, $pos, $_url_params, $script, $frame, $max_cou
                 . $frame . '">' . $caption2 . '</a>';
         }
 
-        echo "\n", '<form action="./', basename($script), '" method="post" target="', $frame, '">', "\n";
+        echo "\n", '<form action="', basename($script), '" method="post" target="', $frame, '">', "\n";
         echo PMA_generate_common_hidden_inputs($_url_params);
         echo PMA_pageselector(
             $max_count,
@@ -2644,8 +2653,8 @@ function PMA_display_html_checkbox($html_field_name, $label, $checked, $onclick)
  * @return the HTML for the tadio buttons
  */
 function PMA_display_html_radio($html_field_name, $choices, $checked_choice = '',
-$line_break = true, $escape_label = true, $class='')
-{
+    $line_break = true, $escape_label = true, $class=''
+) {
     foreach ($choices as $choice_value => $choice_label) {
         if (! empty($class)) {
             echo '<div class="' . $class . '">';
@@ -2810,7 +2819,7 @@ function PMA_toggleButton($action, $select_name, $options, $callback)
 /**
  * Clears cache content which needs to be refreshed on user change.
  *
- * @return nothing
+ * @return void
  */
 function PMA_clearUserCache()
 {
@@ -2876,7 +2885,7 @@ function PMA_cacheSet($var, $val = null, $server = 0)
  * @param string   $var    variable name
  * @param int|true $server server
  *
- * @return nothing
+ * @return void
  */
 function PMA_cacheUnset($var, $server = 0)
 {
@@ -3214,7 +3223,7 @@ function PMA_expandUserString($string, $escape = null, $updates = array())
         );
 
     /* Optional escaping */
-    if (!is_null($escape)) {
+    if (! is_null($escape)) {
         foreach ($replace as $key => $val) {
             $replace[$key] = $escape($val);
         }
@@ -3256,7 +3265,7 @@ function PMA_expandUserString($string, $escape = null, $updates = array())
  * @param array              $extra_data extra data  optional -
  *                                       any other data as part of the json request
  *
- * @return nothing
+ * @return void
  */
 function PMA_ajaxResponse($message, $success = true, $extra_data = array())
 {
@@ -3293,8 +3302,9 @@ function PMA_ajaxResponse($message, $success = true, $extra_data = array())
 
     echo json_encode($response);
 
-    if (!defined('TESTSUITE'))
+    if (! defined('TESTSUITE')) {
         exit;
+    }
 }
 
 /**
@@ -3302,7 +3312,7 @@ function PMA_ajaxResponse($message, $success = true, $extra_data = array())
  *
  * @param string $max_upload_size maximum upload size
  *
- * @return nothing
+ * @return void
  */
 function PMA_browseUploadFile($max_upload_size)
 {
@@ -3321,14 +3331,14 @@ function PMA_browseUploadFile($max_upload_size)
  * @param array  $import_list array of import types
  * @param string $uploaddir   upload directory
  *
- * @return nothing
+ * @return void
  */
 function PMA_selectUploadFile($import_list, $uploaddir)
 {
     echo '<label for="radio_local_import_file">' . sprintf(__("Select from the web server upload directory <b>%s</b>:"), htmlspecialchars(PMA_userDir($uploaddir))) . '</label>';
     $extensions = '';
     foreach ($import_list as $key => $val) {
-        if (!empty($extensions)) {
+        if (! empty($extensions)) {
             $extensions .= '|';
         }
         $extensions .= $val['extension'];
@@ -3348,7 +3358,7 @@ function PMA_selectUploadFile($import_list, $uploaddir)
         PMA_Message::error(
             __('The directory you set for upload work cannot be reached')
         )->display();
-    } elseif (!empty($files)) {
+    } elseif (! empty($files)) {
         echo "\n";
         echo '    <select style="margin: 5px" size="1" name="local_import_file" id="select_local_import_file">' . "\n";
         echo '        <option value="">&nbsp;</option>' . "\n";
@@ -3854,12 +3864,12 @@ function PMA_analyzeLimitClause($limit_clause)
 /**
  * Outputs HTML code for print button.
  *
- * @return nothing
+ * @return void
  */
 function PMA_printButton()
 {
     echo '<p class="print_ignore">';
-    echo '<input type="button" id="print" value="' . __('Print') . '" />';
+    echo '<input type="button" class="button" id="print" value="' . __('Print') . '" />';
     echo '</p>';
 }
 ?>

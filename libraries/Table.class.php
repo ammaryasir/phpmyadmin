@@ -108,7 +108,7 @@ class PMA_Table
      *
      * @param string $table_name new table name
      *
-     * @return nothing
+     * @return void
      */
     function setName($table_name)
     {
@@ -135,7 +135,7 @@ class PMA_Table
      *
      * @param string $db_name database name
      *
-     * @return nothing
+     * @return void
      */
     function setDbName($db_name)
     {
@@ -204,7 +204,7 @@ class PMA_Table
      * @param string $param name
      * @param mixed  $value value
      *
-     * @return nothing
+     * @return void
      */
     function set($param, $value)
     {
@@ -1254,7 +1254,7 @@ class PMA_Table
         }
 
         $this->messages[] = sprintf(
-            __('Table %s has been renamed to %s'),
+            __('Table %1$s has been renamed to %2$s.'),
             htmlspecialchars($old_name),
             htmlspecialchars($new_name)
         );
@@ -1428,7 +1428,7 @@ class PMA_Table
      * If pmadb and table_uiprefs is set, it will load the UI preferences from
      * phpMyAdmin database.
      *
-     * @return nothing
+     * @return void
      */
     protected function loadUiPrefs()
     {

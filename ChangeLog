@@ -5,8 +5,21 @@ phpMyAdmin - ChangeLog
 + Patch #3481047 for rfe #3480477 Insert as new row enhancement
 + Patch #3480999 Activate codemirror in the query window
 - Patch #3495284 XML Import - fix message and redirect
-+ rfe # 3484063 Null checkbox behavior
++ rfe #3484063 Null checkbox behavior
 + Patch #3497179 Contest-5: Add user: Allow create DB w/same name + grant u_%
++ Patch #3498201 Contest-6: Export all privileges
++ Patch #3502814 for rfe #3187077 Change password buttons should match
++ rfe #3488640 Expand table-group in non-light navigation frame if only one
++ Patch #3509360 Contest-3: Option "Truncate table" before "insert"
++ Patch #3506552 Contest-2: Show index information in the data dictionary
++ Patch #3510656 Contest-1: Ignoring foreign keys while dropping tables
+- Bug #3509686 Reverting sort on joined column does not work
++ New transformation: append string
+
+3.5.1.0 (not yet released)
+- bug #3510784 [edit] Limit clause ignored when sort order is remembered
+- bug #3511471 [interface] View name not seen in navi panel (MySQL 5.1)
+- bug #3512916 [display] Right frame reloads after displaying SQL result(zero rows)
 
 3.5.0.0 (not yet released)
 + rfe #2021981 [interface] Add support for mass prefix change.
@@ -81,10 +94,14 @@ phpMyAdmin - ChangeLog
 - bug #3423717 [core] Improved detection of SSL connection
 + FULLTEXT support for InnoDB, starting with MySQL 5.6.4
 - bug #3497151 [interface] Duplicate inline query edit box
+- bug #3504567 [mime] Description of the transformation missing in the tooltip 
 
 3.4.11.0 (not yet released)
 - bug #3486970 [import] Exception on XML import
 - bug #3488777 [navi] $cfg['ShowTooltipAliasTB'] and blank names in navigation
+
+3.4.10.2 (2012-03-28)
+- [security] Fixed local path disclosure vulnerability, see PMASA-2012-2
 
 3.4.10.1 (2012-02-18)
 - [security] XSS in replication setup, see PMASA-2012-1

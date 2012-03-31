@@ -29,6 +29,26 @@ $GLOBALS['js_include'][] = 'canvg/canvg.js';
 $GLOBALS['js_include'][] = 'jquery/jquery-ui-1.8.16.custom.js';
 $GLOBALS['js_include'][] = 'jquery/timepicker.js';
 
+/**
+ * Sets globals from $_POST
+ */
+$post_params = array(
+    'collations',
+    'dataLabel',
+    'fields',
+    'fields_null',
+    'inputs',
+    'max_number_of_fields',
+    'maxPlotLimit',
+    'types',
+    'zoom_submit',
+    'zoomFunc'
+);
+foreach ($post_params as $one_post_param) {
+    if (isset($_POST[$one_post_param])) {
+        $GLOBALS[$one_post_param] = $_POST[$one_post_param];
+    }
+}
 
 /**
  * Handle AJAX request for data row on point select
@@ -64,20 +84,20 @@ if (isset($_REQUEST['get_data_row']) && $_REQUEST['get_data_row'] == true) {
 if (isset($_REQUEST['change_tbl_info']) && $_REQUEST['change_tbl_info'] == true) {
     $extra_data = array();
     $field = $_REQUEST['field'];
-    if($field == 'pma_null') {
+    if ($field == 'pma_null') {
         $extra_data['field_type'] = '';
         $extra_data['field_collation'] = '';
         $extra_data['field_operators'] = '';
-        PMA_ajaxResponse(NULL, true, $extra_data);
+        PMA_ajaxResponse(null, true, $extra_data);
     }
 
 
     // Gets the list and number of fields
-    list($fields_list, $fields_type, $fields_collation, $fields_null) = PMA_tbl_getFields($_REQUEST['db'],$_REQUEST['table']);
+    list($fields_list, $fields_type, $fields_collation, $fields_null) = PMA_tbl_getFields($_REQUEST['db'], $_REQUEST['table']);
 
     $foreigners = PMA_getForeigners($db, $table);
     $titles['Browse'] = PMA_getIcon('b_browse.png', __('Browse foreign values'));
-    $key = array_search($field,$fields_list);
+    $key = array_search($field, $fields_list);
     $extra_data['field_type'] = $fields_type[$key];
     $extra_data['field_collation'] = $fields_collation[$key];
     
@@ -86,29 +106,29 @@ if (isset($_REQUEST['change_tbl_info']) && $_REQUEST['change_tbl_info'] == true)
     if (strncasecmp($fields_type[$key], 'enum', 4) == 0) {
         foreach ($GLOBALS['cfg']['EnumOperators'] as $fc) {
             $html .= "\n" . '                        '
-            . '<option value="' . htmlspecialchars($fc) . '">'
-            . htmlspecialchars($fc) . '</option>';
+                . '<option value="' . htmlspecialchars($fc) . '">'
+                . htmlspecialchars($fc) . '</option>';
         }
     } elseif (preg_match('@char|blob|text|set@i', $fields_type[$key])) {
-    foreach ($GLOBALS['cfg']['TextOperators'] as $fc) {
-        $html .= "\n" . '                        '
-            . '<option value="' . htmlspecialchars($fc) . '">'
-            . htmlspecialchars($fc) . '</option>';
+        foreach ($GLOBALS['cfg']['TextOperators'] as $fc) {
+            $html .= "\n" . '                        '
+                . '<option value="' . htmlspecialchars($fc) . '">'
+                . htmlspecialchars($fc) . '</option>';
         }
     } else {
-    foreach ($GLOBALS['cfg']['NumOperators'] as $fc) {
-        $html .= "\n" . '                        '
-            . '<option value="' .  htmlspecialchars($fc) . '">'
-            . htmlspecialchars($fc) . '</option>';
-    }
+        foreach ($GLOBALS['cfg']['NumOperators'] as $fc) {
+            $html .= "\n" . '                        '
+                . '<option value="' .  htmlspecialchars($fc) . '">'
+                . htmlspecialchars($fc) . '</option>';
+        }
     } // end if... else...
 
     if ($fields_null[$key]) {
         foreach ($GLOBALS['cfg']['NullOperators'] as $fc) {
-        $html .= "\n" . '                        '
+            $html .= "\n" . '                        '
                 . '<option value="' .  htmlspecialchars($fc) . '">'
-        . htmlspecialchars($fc) . '</option>';
-    }
+                . htmlspecialchars($fc) . '</option>';
+        }
     }
     $html .= '</select>';
     $extra_data['field_operators'] = $html;
@@ -119,9 +139,20 @@ if (isset($_REQUEST['change_tbl_info']) && $_REQUEST['change_tbl_info'] == true)
     $foreignData = PMA_getForeignData($foreigners, $field, false, '', '');
 
     // HTML for field values
-    $html = PMA_getForeignFields_Values($foreigners, $foreignData, $field, array($_REQUEST['it'] => $fields_type[$key]), $_REQUEST['it'] ,$_REQUEST['db'], $_REQUEST['table'], $titles, $GLOBALS['cfg']['ForeignKeyMaxLimit'], '');
+    $html = PMA_getForeignFields_Values(
+        $foreigners,
+        $foreignData,
+        $field,
+        array($_REQUEST['it'] => $fields_type[$key]),
+        $_REQUEST['it'],
+        $_REQUEST['db'],
+        $_REQUEST['table'],
+        $titles,
+        $GLOBALS['cfg']['ForeignKeyMaxLimit'],
+        ''
+    );
     $extra_data['field_value'] = $html;
-    PMA_ajaxResponse(NULL, true, $extra_data);
+    PMA_ajaxResponse(null, true, $extra_data);
 }
 
 $titles['Browse'] = PMA_getIcon('b_browse.png', __('Browse foreign values'));
@@ -160,6 +191,7 @@ $fields_cnt = count($fields_list);
 $foreigners = PMA_getForeigners($db, $table);
 $flag = 1;
 $tbl_fields_type = $tbl_fields_collation = $tbl_fields_null = array();
+
 if (! isset($zoom_submit) && ! isset($inputs)) {
     $dataLabel = PMA_getDisplayField($db, $table);
 }

@@ -87,7 +87,7 @@ function suggestPassword(passwd_form)
     passwd.value = '';
 
     for ( i = 0; i < passwordlength; i++ ) {
-        passwd.value += pwchars.charAt( Math.floor( Math.random() * pwchars.length ) )
+        passwd.value += pwchars.charAt( Math.floor( Math.random() * pwchars.length ) );
     }
     passwd_form.text_pma_pw.value = passwd.value;
     passwd_form.text_pma_pw2.value = passwd.value;
@@ -157,8 +157,8 @@ function PMA_current_version()
 
 function displayPasswordGenerateButton()
 {
-    $('#tr_element_before_generate_password').parent().append('<tr><td>' + PMA_messages['strGeneratePassword'] + '</td><td><input type="button" id="button_generate_password" value="' + PMA_messages['strGenerate'] + '" onclick="suggestPassword(this.form)" /><input type="text" name="generated_pw" id="generated_pw" /></td></tr>');
-    $('#div_element_before_generate_password').parent().append('<div class="item"><label for="button_generate_password">' + PMA_messages['strGeneratePassword'] + ':</label><span class="options"><input type="button" id="button_generate_password" value="' + PMA_messages['strGenerate'] + '" onclick="suggestPassword(this.form)" /></span><input type="text" name="generated_pw" id="generated_pw" /></div>');
+    $('#tr_element_before_generate_password').parent().append('<tr><td>' + PMA_messages['strGeneratePassword'] + '</td><td><input type="button" class="button" id="button_generate_password" value="' + PMA_messages['strGenerate'] + '" onclick="suggestPassword(this.form)" /><input type="text" name="generated_pw" id="generated_pw" /></td></tr>');
+    $('#div_element_before_generate_password').parent().append('<div class="item"><label for="button_generate_password">' + PMA_messages['strGeneratePassword'] + ':</label><span class="options"><input type="button" class="button" id="button_generate_password" value="' + PMA_messages['strGenerate'] + '" onclick="suggestPassword(this.form)" /></span><input type="text" name="generated_pw" id="generated_pw" /></div>');
 }
 
 /*
@@ -193,8 +193,8 @@ function PMA_addDatepicker($this_element, options)
 
             // Fix wrong timepicker z-index, doesn't work without timeout
             setTimeout(function() {
-                $('#ui-timepicker-div').css('z-index',$('#ui-datepicker-div').css('z-index'))
-            },0);
+                $('#ui-timepicker-div').css('z-index',$('#ui-datepicker-div').css('z-index'));
+            }, 0);
         }
     };
 
@@ -242,7 +242,7 @@ function confirmLink(theLink, theSqlQuery)
         return true;
     }
 
-    var is_confirmed = confirm(PMA_messages['strDoYouReally'] + ' :\n' + theSqlQuery);
+    var is_confirmed = confirm(PMA_messages['strDoYouReally'] + '\n' + theSqlQuery);
     if (is_confirmed) {
         if ( $(theLink).hasClass('formLinkSubmit') ) {
             var name = 'is_js_confirmed';
@@ -311,7 +311,7 @@ function confirmQuery(theForm1, sqlQuery1)
         var message      = (sqlQuery1.value.length > 100)
                          ? sqlQuery1.value.substr(0, 100) + '\n    ...'
                          : sqlQuery1.value;
-        var is_confirmed = confirm(PMA_messages['strDoYouReally'] + ' :\n' + message);
+        var is_confirmed = confirm(PMA_messages['strDoYouReally'] + '\n' + message);
         // statement is confirmed -> update the
         // "is_js_confirmed" form field so the confirm test won't be
         // run on the server side and allows to submit the form
@@ -480,7 +480,7 @@ function checkTableEditForm(theForm, fieldsCnt)
     {
         id = "#field_" + i + "_2";
         elm = $(id);
-        val = elm.val()
+        val = elm.val();
         if (val == 'VARCHAR' || val == 'CHAR' || val == 'BIT' || val == 'VARBINARY' || val == 'BINARY') {
             elm2 = $("#field_" + i + "_3");
             val = parseInt(elm2.val());
@@ -524,7 +524,7 @@ $(document).ready(function() {
      * next pages reached via AJAX); a tr may have the class noclick to remove
      * this behavior.
      */
-    $('table:not(.noclick) tr.odd:not(.noclick), table:not(.noclick) tr.even:not(.noclick)').live('click',function(e) {
+    $('table:not(.noclick) tr.odd:not(.noclick), table:not(.noclick) tr.even:not(.noclick)').live('click', function(e) {
         // do not trigger when clicked on anchor
         if ($(e.target).is('a, img, a *')) {
             return;
@@ -684,7 +684,7 @@ function unMarkAllRows( container_id )
 function setCheckboxes( container_id, state )
 {
 
-    if(state) {
+    if (state) {
         $("#"+container_id).find("input:checkbox").attr('checked', 'checked');
     }
     else {
@@ -763,7 +763,7 @@ function insertQuery(queryType)
                query = "INSERT INTO `" + table + "`(" + chaineAj + ") VALUES (" + valDis + ")";
         } else if (queryType == "update") {
             query = "UPDATE `" + table + "` SET " + editDis + " WHERE 1";
-        } else if(queryType == "delete") {
+        } else if (queryType == "delete") {
             query = "DELETE FROM `" + table + "` WHERE 1";
         }
         setQuery(query);
@@ -781,7 +781,7 @@ function insertValueQuery()
     var myQuery = document.sqlform.sql_query;
     var myListBox = document.sqlform.dummy;
 
-    if(myListBox.options.length > 0) {
+    if (myListBox.options.length > 0) {
         sql_box_locked = true;
         var chaineAj = "";
         var NbSelect = 0;
@@ -844,9 +844,9 @@ function refreshDragOption(e)
   */
 function refreshLayout()
 {
-    var elm = $('#pdflayout')
+    var elm = $('#pdflayout');
     var orientation = $('#orientation_opt').val();
-    if($('#paper_opt').length==1){
+    if ($('#paper_opt').length==1) {
         var paper = $('#paper_opt').val();
     }else{
         var paper = 'A4';
@@ -872,11 +872,11 @@ function ToggleDragDrop(e)
         PDFinit(); /* Defined in pdf_pages.php */
         elm.css('visibility', 'visible');
         elm.css('display', 'block');
-        $('#showwysiwyg').val('1')
+        $('#showwysiwyg').val('1');
     } else {
         elm.css('visibility', 'hidden');
         elm.css('display', 'none');
-        $('#showwysiwyg').val('0')
+        $('#showwysiwyg').val('0');
     }
 }
 
@@ -1055,8 +1055,8 @@ function pdfPaperSize(format, axis)
 /**
  * Jquery Coding for inline editing SQL_QUERY
  */
-$(document).ready(function(){
-    $(".inline_edit_sql").live('click', function(){
+$(document).ready(function() {
+    $(".inline_edit_sql").live('click', function() {
         if ($('#sql_query_edit').length) {
             // An inline query editor is already open,
             // we don't want another copy of it
@@ -1069,8 +1069,8 @@ $(document).ready(function(){
         var old_text   = $inner_sql.html();
 
         var new_content = "<textarea name=\"sql_query_edit\" id=\"sql_query_edit\">" + sql_query + "</textarea>\n";
-        new_content    += "<input type=\"button\" class=\"btnSave\" value=\"" + PMA_messages['strGo'] + "\">\n";
-        new_content    += "<input type=\"button\" class=\"btnDiscard\" value=\"" + PMA_messages['strCancel'] + "\">\n";
+        new_content    += "<input type=\"submit\" class=\"button btnSave\" value=\"" + PMA_messages['strGo'] + "\">\n";
+        new_content    += "<input type=\"button\" class=\"button btnDiscard\" value=\"" + PMA_messages['strCancel'] + "\">\n";
         $inner_sql.replaceWith(new_content);
 
         // These settings are duplicated from the .ready()function in functions.js
@@ -1085,7 +1085,7 @@ $(document).ready(function(){
         codemirror_editor.getScrollerElement().style.height = height;
         codemirror_editor.refresh();
 
-        $(".btnSave").click(function(){
+        $(".btnSave").click(function() {
             if (codemirror_editor !== undefined) {
                 var sql_query = codemirror_editor.getValue();
             } else {
@@ -1097,19 +1097,19 @@ $(document).ready(function(){
                     .append($('<input>', {type: 'hidden', name: 'sql_query', value: sql_query}));
             $fake_form.appendTo($('body')).submit();
         });
-        $(".btnDiscard").click(function(){
+        $(".btnDiscard").click(function() {
             $(this).closest(".sql").html("<span class=\"syntax\"><span class=\"inner_sql\">" + old_text + "</span></span>");
         });
         return false;
     });
 
-    $('.sqlbutton').click(function(evt){
+    $('.sqlbutton').click(function(evt) {
         insertQuery(evt.target.id);
         return false;
     });
 
-    $("#export_type").change(function(){
-        if($("#export_type").val()=='svg'){
+    $("#export_type").change(function() {
+        if ($("#export_type").val()=='svg') {
             $("#show_grid_opt").attr("disabled","disabled");
             $("#orientation_opt").attr("disabled","disabled");
             $("#with_doc").attr("disabled","disabled");
@@ -1118,7 +1118,7 @@ $(document).ready(function(){
             $("#paper_opt").removeAttr("disabled","disabled");
             $("#show_color_opt").removeAttr("disabled","disabled");
             //$(this).css("background-color","yellow");
-        }else if($("#export_type").val()=='dia'){
+        } else if ($("#export_type").val()=='dia') {
             $("#show_grid_opt").attr("disabled","disabled");
             $("#with_doc").attr("disabled","disabled");
             $("#show_table_dim_opt").attr("disabled","disabled");
@@ -1126,7 +1126,7 @@ $(document).ready(function(){
             $("#paper_opt").removeAttr("disabled","disabled");
             $("#show_color_opt").removeAttr("disabled","disabled");
             $("#orientation_opt").removeAttr("disabled","disabled");
-        }else if($("#export_type").val()=='eps'){
+        } else if ($("#export_type").val()=='eps') {
             $("#show_grid_opt").attr("disabled","disabled");
             $("#orientation_opt").removeAttr("disabled");
             $("#with_doc").attr("disabled","disabled");
@@ -1135,7 +1135,7 @@ $(document).ready(function(){
             $("#paper_opt").attr("disabled","disabled");
             $("#show_color_opt").attr("disabled","disabled");
 
-        }else if($("#export_type").val()=='pdf'){
+        } else if ($("#export_type").val()=='pdf') {
             $("#show_grid_opt").removeAttr("disabled");
             $("#orientation_opt").removeAttr("disabled");
             $("#with_doc").removeAttr("disabled","disabled");
@@ -1143,7 +1143,7 @@ $(document).ready(function(){
             $("#all_table_same_wide").removeAttr("disabled","disabled");
             $("#paper_opt").removeAttr("disabled","disabled");
             $("#show_color_opt").removeAttr("disabled","disabled");
-        }else{
+        } else {
             // nothing
         }
     });
@@ -1345,9 +1345,9 @@ function PMA_showNoticeForEnum(selectElement)
     enum_notice_id += "_" + (parseInt(selectElement.attr("id").split("_")[2]) + 1);
     var selectedType = selectElement.val();
     if (selectedType == "ENUM" || selectedType == "SET") {
-        $("p[id='enum_notice_" + enum_notice_id + "']").show();
+        $("p#enum_notice_" + enum_notice_id).show();
     } else {
-        $("p[id='enum_notice_" + enum_notice_id + "']").hide();
+        $("p#enum_notice_" + enum_notice_id).hide();
     }
 }
 
@@ -1362,10 +1362,20 @@ function PMA_createTableDialog( $div, url , target)
      */
      var button_options = {};
      // in the following function we need to use $(this)
-     button_options[PMA_messages['strCancel']] = function() {$(this).closest('.ui-dialog-content').dialog('close').remove();}
+     button_options[PMA_messages['strCancel']] = function() {
+         $(this).closest('.ui-dialog-content').dialog('close').remove();
+     };
 
      var button_options_error = {};
-     button_options_error[PMA_messages['strOK']] = function() {$(this).closest('.ui-dialog-content').dialog('close').remove();}
+     button_options_error[PMA_messages['strOK']] = function() {
+         $(this).closest('.ui-dialog-content').dialog('close').remove();
+     };
+
+     // allow create-table form only once
+     if ($('#create_table_form').length) {
+        $('#create_table_form input[autofocus]').focus();
+        return;
+     }
 
      var $msgbox = PMA_ajaxShowMessage();
 
@@ -1427,6 +1437,9 @@ function PMA_createTableDialog( $div, url , target)
                      var $save_button  = $('#create_table_form').find("input[name='do_save_data']");
                      $cancel_button.insertAfter($save_button);
                      $button_pane.hide();
+
+                     // focus table name input
+                     $(this).find("input[autofocus]").focus();
                  },
                  close: function() {
                      $(window).unbind('resize.dialog-resizer');
@@ -1479,7 +1492,7 @@ function PMA_createChart(passedSettings)
 
                     // No realtime updates for graphs that are being exported, and disabled when realtime is not set
                     // Also don't do live charting if we don't have the server time
-                    if(thisChart.options.chart.forExport == true ||
+                    if (thisChart.options.chart.forExport == true ||
                         ! thisChart.options.realtime ||
                         ! thisChart.options.realtime.callback ||
                         ! server_time_diff) return;
@@ -1492,7 +1505,7 @@ function PMA_createChart(passedSettings)
                                 try {
                                     curValue = jQuery.parseJSON(data);
                                 } catch (err) {
-                                    if(thisChart.options.realtime.error)
+                                    if (thisChart.options.realtime.error)
                                         thisChart.options.realtime.error(err);
                                     return;
                                 }
@@ -1509,7 +1522,7 @@ function PMA_createChart(passedSettings)
                                     false
                                 );
 
-                                thisChart.options.realtime.callback(thisChart,curValue,lastValue,numLoadedPoints);
+                                thisChart.options.realtime.callback(thisChart, curValue, lastValue, numLoadedPoints);
 
                                 lastValue = curValue;
                                 numLoadedPoints++;
@@ -1524,7 +1537,7 @@ function PMA_createChart(passedSettings)
                                     thisChart.options.realtime.refreshRate
                                 );
                         });
-                    }
+                    };
 
                     chart_activeTimeouts[container] = setTimeout(thisChart.options.realtime.timeoutCallBack, 5);
                 }
@@ -1565,29 +1578,29 @@ function PMA_createChart(passedSettings)
             enabled: true
         },
         series: []
-    }
+    };
 
     /* Set/Get realtime chart default values */
-    if(passedSettings.realtime) {
-        if(!passedSettings.realtime.refreshRate) {
+    if (passedSettings.realtime) {
+        if (!passedSettings.realtime.refreshRate) {
             passedSettings.realtime.refreshRate = 5000;
         }
 
-        if(!passedSettings.realtime.numMaxPoints) {
+        if (!passedSettings.realtime.numMaxPoints) {
             passedSettings.realtime.numMaxPoints = 30;
         }
 
         // Allow custom POST vars to be added
-        passedSettings.realtime.postData = $.extend(false,{ ajax_request: true, chart_data: 1, type: passedSettings.realtime.type },passedSettings.realtime.postData);
+        passedSettings.realtime.postData = $.extend(false, { ajax_request: true, chart_data: 1, type: passedSettings.realtime.type }, passedSettings.realtime.postData);
 
-        if(server_time_diff) {
+        if (server_time_diff) {
             settings.xAxis.min = new Date().getTime() - server_time_diff - passedSettings.realtime.numMaxPoints * passedSettings.realtime.refreshRate;
             settings.xAxis.max = new Date().getTime() - server_time_diff + passedSettings.realtime.refreshRate;
         }
     }
 
     // Overwrite/Merge default settings with passedsettings
-    $.extend(true,settings,passedSettings);
+    $.extend(true, settings, passedSettings);
 
     return new Highcharts.Chart(settings);
 }
@@ -1627,7 +1640,7 @@ function PMA_createProfilingChart(data, options)
                 return '<b>'+ this.point.name +'</b><br/>'+PMA_prettyProfilingNum(this.y)+'<br/>('+Highcharts.numberFormat(this.percentage, 2) +' %)';
             }
         }
-    },options));
+    }, options));
 }
 
 /**
@@ -1642,7 +1655,7 @@ function PMA_prettyProfilingNum(num, acc)
     if (!acc) {
         acc = 2;
     }
-    acc = Math.pow(10,acc);
+    acc = Math.pow(10, acc);
     if (num * 1000 < 0.1) {
         num = Math.round(acc * (num * 1000 * 1000)) / acc + 'µ';
     } else if (num < 0.1) {
@@ -1691,14 +1704,14 @@ function PMA_SQLPrettyPrint(string)
     while (! stream.eol()) {
         stream.start = stream.pos;
         token = mode.token(stream, state);
-        if(token != null) {
+        if (token != null) {
             tokens.push([token, stream.current().toLowerCase()]);
         }
     }
 
     var currentStatement = tokens[0][1];
 
-    if(! statements[currentStatement]) {
+    if (! statements[currentStatement]) {
         return string;
     }
     // Holds all currently opened code blocks (statement, function or generic)
@@ -1791,7 +1804,7 @@ function PMA_SQLPrettyPrint(string)
                 output += "\n" + tabs(indentLevel + 1);
             }
             // Todo: Also split and or blocks in newlines & identation++
-            //if(blockStack[0] == 'generic')
+            //if (blockStack[0] == 'generic')
              //   output += ...
         }
     }
@@ -1818,18 +1831,26 @@ jQuery.fn.PMA_confirm = function(question, url, callbackFn) {
      *                          dialog
      */
     var button_options = {};
-    button_options[PMA_messages['strOK']] = function(){
-                                                $(this).dialog("close").remove();
+    button_options[PMA_messages['strOK']] = function() {
+        $(this).dialog("close");
 
-                                                if($.isFunction(callbackFn)) {
-                                                    callbackFn.call(this, url);
-                                                }
-                                            };
-    button_options[PMA_messages['strCancel']] = function() {$(this).dialog("close").remove();}
+        if ($.isFunction(callbackFn)) {
+            callbackFn.call(this, url);
+        }
+    };
+    button_options[PMA_messages['strCancel']] = function() {
+        $(this).dialog("close");
+    };
 
-    $('<div id="confirm_dialog"></div>')
+    $('<div/>', {'id':'confirm_dialog'})
     .prepend(question)
-    .dialog({buttons: button_options});
+    .dialog({
+        buttons: button_options,
+        close: function () {
+            $(this).remove();
+        },
+        modal: true
+    });
 };
 
 /**
@@ -1855,24 +1876,24 @@ jQuery.fn.PMA_sort_table = function(text_selector) {
         //get the text of the field that we will sort by
         $.each(rows, function(index, row) {
             row.sortKey = $.trim($(row).find(text_selector).text().toLowerCase());
-        })
+        });
 
         //get the sorted order
-        rows.sort(function(a,b) {
-            if(a.sortKey < b.sortKey) {
+        rows.sort(function(a, b) {
+            if (a.sortKey < b.sortKey) {
                 return -1;
             }
-            if(a.sortKey > b.sortKey) {
+            if (a.sortKey > b.sortKey) {
                 return 1;
             }
             return 0;
-        })
+        });
 
         //pull out each row from the table and then append it according to it's order
         $.each(rows, function(index, row) {
             $(table_body).append(row);
             row.sortKey = null;
-        })
+        });
 
         //Re-check the classes of each row
         $(this).find('tr:odd')
@@ -1880,8 +1901,8 @@ jQuery.fn.PMA_sort_table = function(text_selector) {
         .end()
         .find('tr:even')
         .removeClass('odd').addClass('even');
-    })
-}
+    });
+};
 
 /**
  * jQuery coding for 'Create Table'.  Used on db_operations.php,
@@ -1944,7 +1965,7 @@ $(document).ready(function() {
                 PMA_prepareForAjaxRequest($form);
                 //User wants to submit the form
                 $.post($form.attr('action'), $form.serialize() + "&do_save_data=" + $(this).val(), function(data) {
-                    if(data.success == true) {
+                    if (data.success == true) {
                         $('#properties_message')
                          .removeClass('error')
                          .html('');
@@ -2008,7 +2029,7 @@ $(document).ready(function() {
                         // scroll to the div containing the error message
                         $('#properties_message')[0].scrollIntoView();
                     }
-                }) // end $.post()
+                }); // end $.post()
             } // end if ($form.hasClass('ajax')
             else {
                 // non-Ajax submit
@@ -2016,7 +2037,7 @@ $(document).ready(function() {
                 $form.submit();
             }
         } // end if (checkTableEditForm() )
-    }) // end create table form (save)
+    }); // end create table form (save)
 
     /**
      * Attach event handler for create table form (add fields)
@@ -2050,9 +2071,9 @@ $(document).ready(function() {
             }
             PMA_verifyColumnsProperties();
             PMA_ajaxRemoveMessage($msgbox);
-        }) //end $.post()
+        }); //end $.post()
 
-    }) // end create table form (add fields)
+    }); // end create table form (add fields)
 
 }, 'top.frame_content'); //end $(document).ready for 'Create Table'
 
@@ -2119,14 +2140,14 @@ $(document).ready(function() {
                         var $error = $temp_div.find(".error code").addClass("error");
                         PMA_ajaxShowMessage($error, false);
                     }
-                }) // end $.post()
+                }); // end $.post()
             } else {
                 // non-Ajax submit
                 $form.append('<input type="hidden" name="do_save_data" value="Save" />');
                 $form.submit();
             }
         }
-    }) // end change table button "do_save_data"
+    }); // end change table button "do_save_data"
 
 }, 'top.frame_content'); //end $(document).ready for 'Change Table'
 
@@ -2158,12 +2179,12 @@ $(document).ready(function() {
                 $("#result_query .notice").remove();
                 $("#result_query").prepend((data.message));
             } else {
-                var $temp_div = $("<div id='temp_div'></div>")
+                var $temp_div = $("<div id='temp_div'></div>");
                 $temp_div.html(data.error);
                 var $error = $temp_div.find("code").addClass("error");
                 PMA_ajaxShowMessage($error, false);
             }
-        }) // end $.post()
+        }); // end $.post()
     });//end of alterTableOrderby ajax submit
 
     /**
@@ -2172,7 +2193,7 @@ $(document).ready(function() {
     $("#copyTable.ajax input[name='submit_copy']").live('click', function(event) {
         event.preventDefault();
         var $form = $("#copyTable");
-        if($form.find("input[name='switch_to_new']").attr('checked')) {
+        if ($form.find("input[name='switch_to_new']").attr('checked')) {
             $form.append('<input type="hidden" name="submit_copy" value="Go" />');
             $form.removeClass('ajax');
             $form.find("#ajax_request_hidden").remove();
@@ -2205,7 +2226,7 @@ $(document).ready(function() {
                     var $error = $temp_div.find("code").addClass("error");
                     PMA_ajaxShowMessage($error, false);
                 }
-            }) // end $.post()
+            }); // end $.post()
         }
     });//end of copyTable ajax submit
 
@@ -2244,7 +2265,7 @@ $(document).ready(function() {
                 var $error = $temp_div.find("code").addClass("error");
                 PMA_ajaxShowMessage($error, false);
             }
-        }) // end $.post()
+        }); // end $.post()
     });//end of table maintanance ajax click
 
 }, 'top.frame_content'); //end $(document).ready for 'Table operations'
@@ -2268,19 +2289,19 @@ $(document).ready(function() {
         /**
          * @var question    String containing the question to be asked for confirmation
          */
-        var question = PMA_messages['strDropDatabaseStrongWarning'] + '\n' + PMA_messages['strDoYouReally'] + ' :\n' + 'DROP DATABASE ' + escapeHtml(window.parent.db);
+        var question = PMA_messages['strDropDatabaseStrongWarning'] + '\n' + PMA_messages['strDoYouReally'] + '\n' + 'DROP DATABASE ' + escapeHtml(window.parent.db);
 
-        $(this).PMA_confirm(question, $(this).attr('href') ,function(url) {
+        $(this).PMA_confirm(question, $(this).attr('href'), function(url) {
 
             PMA_ajaxShowMessage(PMA_messages['strProcessingRequest']);
             $.get(url, {'is_js_confirmed': '1', 'ajax_request': true}, function(data) {
                 //Database deleted successfully, refresh both the frames
                 window.parent.refreshNavigation();
                 window.parent.refreshMain();
-            }) // end $.get()
+            }); // end $.get()
         }); // end $.PMA_confirm()
     }); //end of Drop Database Ajax action
-}) // end of $(document).ready() for Drop Database
+}); // end of $(document).ready() for Drop Database
 
 /**
  * Attach Ajax event handlers for 'Create Database'.  Used wherever libraries/
@@ -2300,7 +2321,7 @@ $(document).ready(function() {
         PMA_prepareForAjaxRequest($form);
 
         $.post($form.attr('action'), $form.serialize(), function(data) {
-            if(data.success == true) {
+            if (data.success == true) {
                 PMA_ajaxShowMessage(data.message);
 
                 //Append database's row to table
@@ -2323,9 +2344,9 @@ $(document).ready(function() {
             else {
                 PMA_ajaxShowMessage(data.error, false);
             }
-        }) // end $.post()
-    }) // end $().live()
-})  // end $(document).ready() for Create Database
+        }); // end $.post()
+    }); // end $().live()
+});  // end $(document).ready() for Create Database
 
 /**
  * Attach Ajax event handlers for 'Change Password' on main.php
@@ -2336,7 +2357,7 @@ $(document).ready(function() {
      * Attach Ajax event handler on the change password anchor
      * @see $cfg['AjaxEnable']
      */
-    $('#change_password_anchor.dialog_active').live('click',function(event) {
+    $('#change_password_anchor.dialog_active').live('click', function(event) {
         event.preventDefault();
         return false;
         });
@@ -2347,20 +2368,59 @@ $(document).ready(function() {
          * @var button_options  Object containing options to be passed to jQueryUI's dialog
          */
         var button_options = {};
-        button_options[PMA_messages['strCancel']] = function() {$(this).dialog('close').remove();}
+        button_options[PMA_messages['strGo']] = function() {
+
+            event.preventDefault();
+
+            /**
+             * @var the_form    Object referring to the change password form
+             */
+            var the_form = $("#change_password_form");
+
+            /**
+             * @var this_value  String containing the value of the submit button.
+             * Need to append this for the change password form on Server Privileges
+             * page to work
+             */
+            var this_value = $(this).val();
+
+            var $msgbox = PMA_ajaxShowMessage(PMA_messages['strProcessingRequest']);
+            $(the_form).append('<input type="hidden" name="ajax_request" value="true" />');
+
+            $.post($(the_form).attr('action'), $(the_form).serialize() + '&change_pw='+ this_value, function(data) {
+                if (data.success == true) {
+                    $("#floating_menubar").after(data.sql_query);
+                    $("#change_password_dialog").hide().remove();
+                    $("#edit_user_dialog").dialog("close").remove();
+                    $('#change_password_anchor.dialog_active').removeClass('dialog_active').addClass('ajax');
+                    PMA_ajaxRemoveMessage($msgbox);
+                }
+                else {
+                    PMA_ajaxShowMessage(data.error, false);
+                }
+            }); // end $.post()
+        };
+
+        button_options[PMA_messages['strCancel']] = function() {
+            $(this).dialog('close').remove();
+        };
         $.get($(this).attr('href'), {'ajax_request': true}, function(data) {
             $('<div id="change_password_dialog"></div>')
             .dialog({
                 title: PMA_messages['strChangePassword'],
                 width: 600,
-                close: function(ev,ui) {$(this).remove();},
+                close: function(ev, ui) {
+                    $(this).remove();
+                },
                 buttons : button_options,
-                beforeClose: function(ev,ui){ $('#change_password_anchor.dialog_active').removeClass('dialog_active').addClass('ajax')}
+                beforeClose: function(ev, ui) { 
+                    $('#change_password_anchor.dialog_active').removeClass('dialog_active').addClass('ajax');
+                }
             })
             .append(data);
             displayPasswordGenerateButton();
-        }) // end $.get()
-    }) // end handler for change password anchor
+        }); // end $.get()
+    }); // end handler for change password anchor
 
     /**
      * Attach Ajax event handler for Change Password form submission
@@ -2368,38 +2428,7 @@ $(document).ready(function() {
      * @uses    PMA_ajaxShowMessage()
      * @see $cfg['AjaxEnable']
      */
-    $("#change_password_form.ajax").find('input[name=change_pw]').live('click', function(event) {
-        event.preventDefault();
-
-        /**
-         * @var the_form    Object referring to the change password form
-         */
-        var the_form = $("#change_password_form");
-
-        /**
-         * @var this_value  String containing the value of the submit button.
-         * Need to append this for the change password form on Server Privileges
-         * page to work
-         */
-        var this_value = $(this).val();
-
-        var $msgbox = PMA_ajaxShowMessage(PMA_messages['strProcessingRequest']);
-        $(the_form).append('<input type="hidden" name="ajax_request" value="true" />');
-
-        $.post($(the_form).attr('action'), $(the_form).serialize() + '&change_pw='+ this_value, function(data) {
-            if(data.success == true) {
-                $("#floating_menubar").after(data.sql_query);
-                $("#change_password_dialog").hide().remove();
-                $("#edit_user_dialog").dialog("close").remove();
-                $('#change_password_anchor.dialog_active').removeClass('dialog_active').addClass('ajax');
-                PMA_ajaxRemoveMessage($msgbox);
-            }
-            else {
-                PMA_ajaxShowMessage(data.error, false);
-            }
-        }) // end $.post()
-    }) // end handler for Change Password form submission
-}) // end $(document).ready() for Change Password
+}); // end $(document).ready() for Change Password
 
 /**
  * Toggle the hiding/showing of the "Open in ENUM/SET editor" message when
@@ -2411,17 +2440,20 @@ $(document).ready(function() {
     PMA_verifyColumnsProperties();
     //
     // needs live() to work also in the Create Table dialog
-    $("select[class='column_type']").live('change', function() {
+    $("select.column_type").live('change', function() {
         PMA_showNoticeForEnum($(this));
     });
     $(".default_type").live('change', function() {
         PMA_hideShowDefaultValue($(this));
     });
+    $('.allow_null').live('change', function() {
+        PMA_validateDefaultValue($(this));
+    });
 });
 
 function PMA_verifyColumnsProperties()
 {
-    $("select[class='column_type']").each(function() {
+    $("select.column_type").each(function() {
         PMA_showNoticeForEnum($(this));
     });
     $(".default_type").each(function() {
@@ -2431,6 +2463,7 @@ function PMA_verifyColumnsProperties()
 
 /**
  * Hides/shows the default value input field, depending on the default type
+ * Ticks the NULL checkbox if NULL is chosen as default value.
  */
 function PMA_hideShowDefaultValue($default_type)
 {
@@ -2438,6 +2471,23 @@ function PMA_hideShowDefaultValue($default_type)
         $default_type.siblings('.default_value').show().focus();
     } else {
         $default_type.siblings('.default_value').hide();
+        if ($default_type.val() == 'NULL') {
+            var $null_checkbox = $default_type.closest('tr').find('.allow_null');
+            $null_checkbox.attr('checked', true);
+        }
+    }
+}
+
+/**
+ * If the column does not allow NULL values, makes sure that default is not NULL
+ */
+function PMA_validateDefaultValue($null_checkbox)
+{
+    if (! $null_checkbox.attr('checked')) {
+        $default = $null_checkbox.closest('tr').find('.default_type');
+        if ($default.val() == 'NULL') {
+            $default.val('NONE');
+        }
     }
 }
 
@@ -2554,7 +2604,7 @@ $(document).ready(function() {
             });
             // get the Length/Values text field where this value belongs
             var values_id = $(this).find("input[type='hidden']").attr("value");
-            $("input[id='" + values_id + "']").attr("value", value_array.join(","));
+            $("input#" + values_id).attr("value", value_array.join(","));
             $(this).dialog("close");
         };
         buttonOptions[PMA_messages['strClose']] = function () {
@@ -2638,18 +2688,13 @@ function displayMoreTableOpts()
 {
     // Remove the actions from the table cells (they are available by default for JavaScript-disabled browsers)
     // if the table is not a view or information_schema (otherwise there is only one action to hide and there's no point)
-    if($("input[type='hidden'][name='table_type']").val() == "table") {
-        var $table = $("table[id='tablestructure']");
-        $table.find("td[class='browse']").remove();
-        $table.find("td[class='primary']").remove();
-        $table.find("td[class='unique']").remove();
-        $table.find("td[class='index']").remove();
-        $table.find("td[class='fulltext']").remove();
-        $table.find("td[class='spatial']").remove();
-        $table.find("th[class='action']").attr("colspan", 3);
+    if ($("input[type='hidden'][name='table_type']").val() == "table") {
+        var $table = $("table#tablestructure");
+        $table.find("td.replaced_by_more").remove();
+        $table.find("th.action").attr("colspan", 3);
 
         // Display the "more" text
-        $table.find("td[class='more_opts']").show();
+        $table.find("td.more_opts").show();
 
         // Position the dropdown
         $(".structure_actions_dropdown").each(function() {
@@ -2665,7 +2710,7 @@ function displayMoreTableOpts()
         // A hack for IE6 to prevent the after_field select element from being displayed on top of the dropdown by
         // positioning an iframe directly on top of it
         var $after_field = $("select[name='after_field']");
-        $("iframe[class='IE_hack']")
+        $("iframe.IE_hack")
             .width($after_field.width())
             .height($after_field.height())
             .offset({
@@ -2674,10 +2719,10 @@ function displayMoreTableOpts()
             });
 
         // When "more" is hovered over, show the hidden actions
-        $table.find("td[class='more_opts']")
+        $table.find("td.more_opts")
             .mouseenter(function() {
-                if($.browser.msie && $.browser.version == "6.0") {
-                    $("iframe[class='IE_hack']")
+                if ($.browser.msie && $.browser.version == "6.0") {
+                    $("iframe.IE_hack")
                         .show()
                         .width($after_field.width()+4)
                         .height($after_field.height()+4)
@@ -2689,7 +2734,7 @@ function displayMoreTableOpts()
                 $(".structure_actions_dropdown").hide(); // Hide all the other ones that may be open
                 $(this).children(".structure_actions_dropdown").show();
                 // Need to do this again for IE otherwise the offset is wrong
-                if($.browser.msie) {
+                if ($.browser.msie) {
                     var left_offset_IE = $(this).offset().left + $(this).innerWidth() - $(this).children(".structure_actions_dropdown").innerWidth();
                     var top_offset_IE = $(this).offset().top + $(this).innerHeight();
                     $(this).children(".structure_actions_dropdown").offset({
@@ -2699,14 +2744,14 @@ function displayMoreTableOpts()
             })
             .mouseleave(function() {
                 $(this).children(".structure_actions_dropdown").hide();
-                if($.browser.msie && $.browser.version == "6.0") {
-                    $("iframe[class='IE_hack']").hide();
+                if ($.browser.msie && $.browser.version == "6.0") {
+                    $("iframe.IE_hack").hide();
                 }
             });
     }
 
 }
-$(document).ready(function(){
+$(document).ready(function() {
     PMA_convertFootnotesToTooltips();
 });
 
@@ -2728,15 +2773,15 @@ function checkIndexName(form_id)
     var $the_idx_type = $("#select_index_type");
 
     // Index is a primary key
-    if ($the_idx_type.find("option:selected").attr("value") == 'PRIMARY') {
-        $the_idx_name.attr("value", 'PRIMARY');
+    if ($the_idx_type.find("option:selected").val() == 'PRIMARY') {
+        $the_idx_name.val('PRIMARY');
         $the_idx_name.attr("disabled", true);
     }
 
     // Other cases
     else {
-        if ($the_idx_name.attr("value") == 'PRIMARY') {
-            $the_idx_name.attr("value",  '');
+        if ($the_idx_name.val() == 'PRIMARY') {
+            $the_idx_name.val("");
         }
         $the_idx_name.attr("disabled", false);
     }
@@ -2791,7 +2836,7 @@ function PMA_convertFootnotesToTooltips($div)
          * initially get the img class as "footnotemarker footnote_2", now we get
          * #2 as the span_id. Using that we can find footnote_2 in footnotes.
          * */
-        var tooltip_text = $footnotes.find("span[id='footnote_" + span_id + "']").html();
+        var tooltip_text = $footnotes.find("span#footnote_" + span_id).html();
         $(this).qtip({
             content: tooltip_text,
             show: { delay: 0 },
@@ -3037,9 +3082,9 @@ var toggleButton = function ($obj) {
     // OFF state we need to move it now.
     if ($('.container', $obj).hasClass('off')) {
         if (right == 'right') {
-            $('table, img', $obj).animate({'left': '-=' + move + 'px'}, 0);
+            $('.container', $obj).animate({'left': '-=' + move + 'px'}, 0);
         } else {
-            $('table, img', $obj).animate({'left': '+=' + move + 'px'}, 0);
+            $('.container', $obj).animate({'left': '+=' + move + 'px'}, 0);
         }
     }
     // Attach an 'onclick' event to the switch
@@ -3073,7 +3118,7 @@ var toggleButton = function ($obj) {
             var addClass = 'on';
         }
         $.post(url, {'ajax_request': true}, function(data) {
-            if(data.success == true) {
+            if (data.success == true) {
                 PMA_ajaxRemoveMessage($msg);
                 $container
                 .removeClass(removeClass)
@@ -3095,9 +3140,7 @@ var toggleButton = function ($obj) {
  */
 $(window).load(function () {
     $('.toggleAjax').each(function () {
-        $(this)
-        .show()
-        .find('.toggleButton')
+        $(this).show();
         toggleButton($(this));
     });
 });
@@ -3115,7 +3158,7 @@ $(document).ready(function() {
             $('.vpointer').filter('.row_' + row_num).toggleClass('hover');
         }
         );
-}) // end of $(document).ready() for vertical pointer
+}); // end of $(document).ready() for vertical pointer
 
 $(document).ready(function() {
     /**
@@ -3194,10 +3237,10 @@ $(document).ready(function() {
     /**
      * Enables the text generated by PMA_linkOrButton() to be clickable
      */
-    $('a[class~="formLinkSubmit"]').live('click',function(e) {
+    $('a.formLinkSubmit').live('click', function(e) {
 
-        if($(this).attr('href').indexOf('=') != -1) {
-            var data = $(this).attr('href').substr($(this).attr('href').indexOf('#')+1).split('=',2);
+        if ($(this).attr('href').indexOf('=') != -1) {
+            var data = $(this).attr('href').substr($(this).attr('href').indexOf('#')+1).split('=', 2);
             $(this).parents('form').append('<input type="hidden" name="' + data[0] + '" value="' + data[1] + '"/>');
         }
         $(this).parents('form').submit();
@@ -3211,8 +3254,7 @@ $(document).ready(function() {
             window.parent.frame_navigation.PMA_reloadRecentTable();
         }
     });
-
-}) // end of $(document).ready()
+}); // end of $(document).ready()
 
 /**
  * Creates a message inside an object with a sliding effect
@@ -3309,19 +3351,19 @@ $(document).ready(function() {
         /**
          * @var question    String containing the question to be asked for confirmation
          */
-        var question = PMA_messages['strDropTableStrongWarning'] + '\n' + PMA_messages['strDoYouReally'] + ' :\n' + 'DROP TABLE ' + window.parent.table;
+        var question = PMA_messages['strDropTableStrongWarning'] + '\n' + PMA_messages['strDoYouReally'] + '\n' + 'DROP TABLE ' + window.parent.table;
 
-        $(this).PMA_confirm(question, $(this).attr('href') ,function(url) {
+        $(this).PMA_confirm(question, $(this).attr('href'), function(url) {
 
             PMA_ajaxShowMessage(PMA_messages['strProcessingRequest']);
             $.get(url, {'is_js_confirmed': '1', 'ajax_request': true}, function(data) {
                 //Database deleted successfully, refresh both the frames
                 window.parent.refreshNavigation();
                 window.parent.refreshMain();
-            }) // end $.get()
+            }); // end $.get()
         }); // end $.PMA_confirm()
     }); //end of Drop Table Ajax action
-}) // end of $(document).ready() for Drop Table
+}); // end of $(document).ready() for Drop Table
 
 /**
  * Attach Ajax event handlers for Truncate Table.
@@ -3340,9 +3382,9 @@ $(document).ready(function() {
         /**
          * @var question    String containing the question to be asked for confirmation
          */
-        var question = PMA_messages['strTruncateTableStrongWarning'] + '\n' + PMA_messages['strDoYouReally'] + ' :\n' + 'TRUNCATE TABLE ' + window.parent.table;
+        var question = PMA_messages['strTruncateTableStrongWarning'] + '\n' + PMA_messages['strDoYouReally'] + '\n' + 'TRUNCATE TABLE ' + window.parent.table;
 
-        $(this).PMA_confirm(question, $(this).attr('href') ,function(url) {
+        $(this).PMA_confirm(question, $(this).attr('href'), function(url) {
 
             PMA_ajaxShowMessage(PMA_messages['strProcessingRequest']);
             $.get(url, {'is_js_confirmed': '1', 'ajax_request': true}, function(data) {
@@ -3357,15 +3399,15 @@ $(document).ready(function() {
                     $("<div id='sqlqueryresults'></div>").insertAfter("#floating_menubar");
                     $("#sqlqueryresults").html(data.sql_query);
                 } else {
-                    var $temp_div = $("<div id='temp_div'></div>")
+                    var $temp_div = $("<div id='temp_div'></div>");
                     $temp_div.html(data.error);
                     var $error = $temp_div.find("code").addClass("error");
                     PMA_ajaxShowMessage($error, false);
                 }
-            }) // end $.get()
+            }); // end $.get()
         }); // end $.PMA_confirm()
     }); //end of Truncate Table Ajax action
-}) // end of $(document).ready() for Truncate Table
+}); // end of $(document).ready() for Truncate Table
 
 /**
  * Attach CodeMirror2 editor to SQL edit area.
@@ -3420,7 +3462,7 @@ $(document).ready(function() {
 (function ($) {
     $.fn.filterByValue = function (value) {
         return this.filter(function () {
-            return $(this).val() === value
+            return $(this).val() === value;
         });
     };
 })(jQuery);
@@ -3462,7 +3504,7 @@ function PMA_createqTip($elements, content, options)
                 length: 200
             }
         }
-    }
+    };
 
     $elements.qtip($.extend(true, o, options));
 }
@@ -3482,7 +3524,7 @@ function PMA_getCellValue(td) {
 
 /* Loads a js file, an array may be passed as well */
 loadJavascript=function(file) {
-    if($.isArray(file)) {
+    if ($.isArray(file)) {
         for(var i=0; i<file.length; i++) {
             $('head').append('<script type="text/javascript" src="'+file[i]+'"></script>');
         }
@@ -3530,12 +3572,12 @@ $(document).ready(function() {
  * Clear text selection
  */
 function PMA_clearSelection() {
-    if(document.selection && document.selection.empty) {
+    if (document.selection && document.selection.empty) {
         document.selection.empty();
-    } else if(window.getSelection) {
+    } else if (window.getSelection) {
         var sel = window.getSelection();
-        if(sel.empty) sel.empty();
-        if(sel.removeAllRanges) sel.removeAllRanges();
+        if (sel.empty) sel.empty();
+        if (sel.removeAllRanges) sel.removeAllRanges();
     }
 }
 
@@ -3603,3 +3645,11 @@ function toggleRowColors($start)
         }
     }
 }
+
+/**
+ * Opens pma more themes link in themes browser, in new window instead of popup
+ * This way, we don't break HTML validity
+ */
+$(function () {
+    $("a._blank").prop("target", "_blank");
+});

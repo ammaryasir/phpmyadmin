@@ -236,7 +236,7 @@ $(document).ready(function() {
                 } else {
                     PMA_ajaxShowMessage(PMA_messages['strErrorProcessingRequest'] + " : " + data.error, false);
                 }
-            })
+            });
         };
         button_options[PMA_messages['strCancel']] = function() { $(this).dialog("close"); };
 
@@ -332,13 +332,13 @@ $(document).ready(function() {
                     .end()
                     .find('tr:even')
                     .removeClass('odd').addClass('even');
-                })
+                });
             }
             else {
                 PMA_ajaxShowMessage(data.error, false);
             }
-        }) // end $.post()
-    }) // end Revoke User
+        }); // end $.post()
+    }); // end Revoke User
 
     /**
      * AJAX handler for 'Edit User'
@@ -382,8 +382,8 @@ $(document).ready(function() {
             displayPasswordGenerateButton();
             PMA_ajaxRemoveMessage($msgbox);
             PMA_convertFootnotesToTooltips($div);
-        }) // end $.get()
-    })
+        }); // end $.get()
+    });
 
     /**
      * Step 2: Submit the Edit User Dialog
@@ -462,7 +462,7 @@ $(document).ready(function() {
                 PMA_ajaxShowMessage(data.error, false);
             }
         });
-    })
+    });
     //end Edit user
 
     /**
@@ -473,6 +473,57 @@ $(document).ready(function() {
      * @memberOf    jQuery
      * @name        export_user_click
      */
+    $("button.mult_submit[value=export]").live('click', function(event) {
+        event.preventDefault();
+        // can't export if no users checked
+        if ($(this.form).find("input:checked").length == 0) {
+            return;
+        }
+        var $msgbox = PMA_ajaxShowMessage();
+        var button_options = {};
+        button_options[PMA_messages['strClose']] = function() {
+            $(this).dialog("close");
+        };
+        $.post($(this.form).prop('action'), 
+            $(this.form).serialize() + '&submit_mult=export&ajax_request=true', 
+            function(data) {
+                var $ajaxDialog = $('<div />')
+                .append(data.message)
+                .dialog({
+                    title: data.title,
+                    width: 500,
+                    buttons: button_options,
+                    close: function () {
+                        $(this).remove();
+                    }
+                });
+                PMA_ajaxRemoveMessage($msgbox);
+                // Attach syntax highlited editor to export dialog
+                CodeMirror.fromTextArea(
+                    $ajaxDialog.find('textarea')[0],
+                    {
+                        lineNumbers: true,
+                        matchBrackets: true,
+                        indentUnit: 4,
+                        mode: "text/x-mysql"
+                    }
+                );
+        }); //end $.post
+    });
+    // if exporting non-ajax, highlight anyways
+    if ($("textarea.export").length > 0)
+    {
+        CodeMirror.fromTextArea(
+            $('textarea.export')[0],
+            {
+                lineNumbers: true,
+                matchBrackets: true,
+                indentUnit: 4,
+                mode: "text/x-mysql"
+            }
+        );
+    }
+
     $(".export_user_anchor.ajax").live('click', function(event) {
         event.preventDefault();
         var $msgbox = PMA_ajaxShowMessage();
@@ -531,8 +582,8 @@ $(document).ready(function() {
              .siblings("h2").not(":first").remove();
 
             PMA_ajaxRemoveMessage($msgbox);
-        }) // end $.get
-    })// end of the paginate users table
+        }); // end $.get
+    }); // end of the paginate users table
 
     /*
      * Additional confirmation dialog after clicking
@@ -541,7 +592,7 @@ $(document).ready(function() {
     $('#checkbox_drop_users_db').click(function() {
         $this_checkbox = $(this);
         if ($this_checkbox.is(':checked')) {
-            var is_confirmed = confirm(PMA_messages['strDropDatabaseStrongWarning'] + '\n' + PMA_messages['strDoYouReally'] + ' :\nDROP DATABASE');
+            var is_confirmed = confirm(PMA_messages['strDropDatabaseStrongWarning'] + '\n' + PMA_messages['strDoYouReally'] + '\nDROP DATABASE');
             if (! is_confirmed) {
                 $this_checkbox.attr('checked', false);
             }

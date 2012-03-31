@@ -3,7 +3,8 @@
 /**
  * Interface to the improved MySQL extension (MySQLi)
  *
- * @package PhpMyAdmin-DBI-MySQLi
+ * @package PhpMyAdmin-DBI
+ * @subpackage MySQLi
  */
 if (! defined('PHPMYADMIN')) {
     exit;
@@ -66,8 +67,11 @@ function PMA_DBI_real_connect($link, $host, $user, $password, $dbname, $server_p
 {
     global $cfg;
 
-    if ($cfg['PersistentConnections'] || $persistent) {
-        $host = 'p:' . $host;
+    // mysqli persistent connections only on PHP 5.3+
+    if (PMA_PHP_INT_VERSION >= 50300) {
+        if ($cfg['PersistentConnections'] || $persistent) {
+            $host = 'p:' . $host;
+        }
     }
     if ($client_flags === null) {
         return @mysqli_real_connect(

@@ -9,8 +9,9 @@
 /**
  * Removes all variables from request except whitelisted ones.
  *
- * @param string list of variables to allow
- * @return nothing
+ * @param string &$whitelist list of variables to allow
+ *
+ * @return void
  * @access public
  */
 function PMA_remove_request_vars(&$whitelist)

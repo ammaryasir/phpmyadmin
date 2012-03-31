@@ -47,7 +47,7 @@ $(document).ready(function() {
         /**
          * @var question    String containing the question to be asked for confirmation
          */
-        var question = PMA_messages['strDoYouReally'] + ' :\n ALTER TABLE `' + escapeHtml(curr_table_name) + '` DROP `' + escapeHtml(curr_column_name) + '`';
+        var question = PMA_messages['strDoYouReally'] + '\n ALTER TABLE `' + escapeHtml(curr_table_name) + '` DROP `' + escapeHtml(curr_column_name) + '`';
 
         $(this).PMA_confirm(question, $(this).attr('href'), function(url) {
 
@@ -70,7 +70,7 @@ $(document).ready(function() {
                 else {
                     PMA_ajaxShowMessage(PMA_messages['strErrorProcessingRequest'] + " : " + data.error, false);
                 }
-            }) // end $.get()
+            }); // end $.get()
         }); // end $.PMA_confirm()
     }) ; //end of Drop Column Anchor action
 
@@ -95,7 +95,7 @@ $(document).ready(function() {
         /**
          * @var question    String containing the question to be asked for confirmation
          */
-        var question = PMA_messages['strDoYouReally'] + ' :\n ALTER TABLE `' + escapeHtml(curr_table_name) + '` ADD PRIMARY KEY(`' + escapeHtml(curr_column_name) + '`)';
+        var question = PMA_messages['strDoYouReally'] + '\n ALTER TABLE `' + escapeHtml(curr_table_name) + '` ADD PRIMARY KEY(`' + escapeHtml(curr_column_name) + '`)';
 
         $(this).PMA_confirm(question, $(this).attr('href'), function(url) {
 
@@ -112,9 +112,9 @@ $(document).ready(function() {
                 else {
                     PMA_ajaxShowMessage(PMA_messages['strErrorProcessingRequest'] + " : " + data.error, false);
                 }
-            }) // end $.get()
-        }) // end $.PMA_confirm()
-    })//end Add Primary Key
+            }); // end $.get()
+        }); // end $.PMA_confirm()
+    }); //end Add Primary Key
 
     /**
      * Ajax Event handler for 'Drop Primary Key/Index'
@@ -168,9 +168,9 @@ $(document).ready(function() {
                 else {
                     PMA_ajaxShowMessage(PMA_messages['strErrorProcessingRequest'] + " : " + data.error, false);
                 }
-            }) // end $.get()
-        }) // end $.PMA_confirm()
-    }) //end Drop Primary Key/Index
+            }); // end $.get()
+        }); // end $.PMA_confirm()
+    }); //end Drop Primary Key/Index
 
     /**
      *Ajax event handler for multi column change
@@ -210,7 +210,7 @@ $(document).ready(function() {
     /**
      *Ajax event handler for index edit
     **/
-    $("#table_index tbody tr td.edit_index.ajax, #indexes .add_index.ajax").live('click', function(event){
+    $("#table_index tbody tr td.edit_index.ajax, #indexes .add_index.ajax").live('click', function(event) {
         event.preventDefault();
         if ($(this).find("a").length == 0) {
             // Add index
@@ -280,11 +280,11 @@ $(document).ready(function() {
                     }
                     PMA_ajaxShowMessage($error, false);
                 }
-            }) // end $.post()
-        }
+            }); // end $.post()
+        };
         button_options[PMA_messages['strCancel']] = function() {
             $(this).dialog('close');
-        }
+        };
         var $msgbox = PMA_ajaxShowMessage();
         $.get("tbl_indexes.php", url, function(data) {
             if (data.error) {
@@ -320,10 +320,20 @@ $(document).ready(function() {
                         );
                     }
                 });
+                // focus index size input on column picked
+                $div.find('table#index_columns select').change(function() {
+                    if ($(this).find("option:selected").val() == '') {
+                        return true;
+                    }
+                    $(this).closest("tr").find("input").focus();
+                });
                 // Focus the slider, otherwise it looks nearly transparent
                 $('.ui-slider-handle').addClass('ui-state-focus');
+                // set focus on index name input, if empty
+                var input = $div.find('input#input_index_name');
+                input.val() || input.focus();
             }
-        }) // end $.get()
+        }); // end $.get()
     });
 
     /**
@@ -344,6 +354,13 @@ $(document).ready(function() {
                 );
             $newrow.find(':input').each(function() {
                 $(this).val('');
+            });
+            // focus index size input on column picked
+            $newrow.find('select').change(function() {
+                if ($(this).find("option:selected").val() == '') {
+                    return true;
+                }
+                $(this).closest("tr").find("input").focus();
             });
         }
     });
@@ -368,10 +385,14 @@ $(document).ready(function() {
          */
         var button_options = {};
         // in the following function we need to use $(this)
-        button_options[PMA_messages['strCancel']] = function() {$(this).dialog('close').remove();}
+        button_options[PMA_messages['strCancel']] = function() {
+            $(this).dialog('close').remove();
+        };
 
         var button_options_error = {};
-        button_options_error[PMA_messages['strOK']] = function() {$(this).dialog('close').remove();}
+        button_options_error[PMA_messages['strOK']] = function() {
+            $(this).dialog('close').remove();
+        };
         var $msgbox = PMA_ajaxShowMessage();
 
         $.get( $form.attr('action') , $form.serialize()+"&ajax_request=true" ,  function(data) {
@@ -386,7 +407,7 @@ $(document).ready(function() {
                     open: PMA_verifyColumnsProperties,
                     modal: true,
                     buttons : button_options_error
-                })// end dialog options
+                }); // end dialog options
             } else {
                 $div
                 .append(data)
@@ -403,14 +424,13 @@ $(document).ready(function() {
                 /*changed the z-index of the enum editor to allow the edit*/
                 $("#enum_editor").css("z-index", "1100");
                 PMA_convertFootnotesToTooltips($div);
+                // set focus on first column name input
+                $div.find("input.textfield").eq(0).focus();
             }
             PMA_ajaxRemoveMessage($msgbox);
-        }) // end $.get()
+        }); // end $.get()
     });
-
-
-
-}) // end $(document).ready()
+}); // end $(document).ready()
 
 /**
  * Loads the append_fields_form to the Change dialog allowing users
@@ -426,6 +446,9 @@ function changeColumns(action,url)
     if ($('#change_column_dialog').length != 0) {
         $('#change_column_dialog').remove();
     }
+    if ($('#result_query').length != 0) {
+        $('#result_query').remove();
+    }
     var $div = $('<div id="change_column_dialog"></div>');
 
     /**
@@ -434,10 +457,14 @@ function changeColumns(action,url)
      */
     var button_options = {};
     // in the following function we need to use $(this)
-    button_options[PMA_messages['strCancel']] = function() {$(this).dialog('close').remove();}
+    button_options[PMA_messages['strCancel']] = function() {
+        $(this).dialog('close').remove();
+    };
 
     var button_options_error = {};
-    button_options_error[PMA_messages['strOK']] = function() {$(this).dialog('close').remove();}
+    button_options_error[PMA_messages['strOK']] = function() {
+        $(this).dialog('close').remove();
+    };
     var $msgbox = PMA_ajaxShowMessage();
 
     $.get( action , url ,  function(data) {
@@ -452,7 +479,7 @@ function changeColumns(action,url)
                 modal: true,
                 open: PMA_verifyColumnsProperties,
                 buttons : button_options_error
-            })// end dialog options
+            }); // end dialog options
         } else {
             $div
             .append(data)
@@ -471,6 +498,6 @@ function changeColumns(action,url)
             PMA_convertFootnotesToTooltips($div);
         }
         PMA_ajaxRemoveMessage($msgbox);
-    }) // end $.get()
+    }); // end $.get()
 }
 

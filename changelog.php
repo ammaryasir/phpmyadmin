@@ -9,7 +9,7 @@
 /**
  * Gets core libraries and defines some variables
  */
-require './libraries/common.inc.php';
+require 'libraries/common.inc.php';
 
 $filename = CHANGELOG_FILE;
 
@@ -64,7 +64,7 @@ $replaces = array(
 
     // linking files
     '/(\s+)([\\/a-z_0-9\.]+\.(?:php3?|html|pl|js|sh))/i'
-    => '\\1<a href="http://phpmyadmin.git.sourceforge.net/git/gitweb.cgi?p=phpmyadmin/phpmyadmin;a=history;f=\\2;hb=HEAD">\\2</a>',
+    => '\\1<a href="https://github.com/phpmyadmin/phpmyadmin/commits/HEAD/\\2">\\2</a>',
 
     // FAQ entries
     '/FAQ ([0-9]+)\.([0-9a-z]+)/i'
@@ -88,9 +88,9 @@ $replaces = array(
 
     // Highlight releases (with links)
     '/([0-9]+)\.([0-9]+)\.([0-9]+)\.0 (\([0-9-]+\))/'
-    => '<a name="\\1_\\2_\\3"></a><a href="http://phpmyadmin.git.sourceforge.net/git/gitweb.cgi?p=phpmyadmin/phpmyadmin;a=shortlog;h=refs/tags/RELEASE_\\1_\\2_\\3">\\1.\\2.\\3.0 \\4</a>',
+    => '<a name="\\1_\\2_\\3"></a><a href="https://github.com/phpmyadmin/phpmyadmin/commits/RELEASE_\\1_\\2_\\3">\\1.\\2.\\3.0 \\4</a>',
     '/([0-9]+)\.([0-9]+)\.([0-9]+)\.([1-9][0-9]*) (\([0-9-]+\))/'
-    => '<a name="\\1_\\2_\\3_\\4"></a><a href="http://phpmyadmin.git.sourceforge.net/git/gitweb.cgi?p=phpmyadmin/phpmyadmin;a=shortlog;h=refs/tags/RELEASE_\\1_\\2_\\3_\\4">\\1.\\2.\\3.\\4 \\5</a>',
+    => '<a name="\\1_\\2_\\3_\\4"></a><a href="https://github.com/phpmyadmin/phpmyadmin/commits/RELEASE_\\1_\\2_\\3_\\4">\\1.\\2.\\3.\\4 \\5</a>',
 
     // Highlight releases (not linkable)
     '/(    ### )(.*)/'
@@ -99,16 +99,14 @@ $replaces = array(
 );
 
 header('Content-type: text/html; charset=utf-8');
-echo '<?xml version="1.0" encoding="utf-8"?'.'>';
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+<!DOCTYPE HTML>
+<html lang="en" dir="ltr">
 <head>
-<link rel="icon" href="./favicon.ico" type="image/x-icon" />
-<link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" />
-<title>phpMyAdmin - ChangeLog</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <title>phpMyAdmin - ChangeLog</title>
+    <meta charset="utf-8" />
 </head>
 <body>
 <h1>phpMyAdmin - ChangeLog</h1>
@@ -117,5 +115,11 @@ echo '<pre>';
 echo preg_replace(array_keys($replaces), $replaces, $changelog);
 echo '</pre>';
 ?>
+<script type="text/javascript">
+var links = document.getElementsByTagName("a");
+for(var i = 0; i < links.length; i++) {
+    links[i].target = "_blank";
+}
+</script>
 </body>
 </html>

@@ -1,22 +1,31 @@
 <?php
 /* vim: set expandtab sw=4 ts=4 sts=4: */
 /**
- * Main export hanling code
+ * Main export handling code
  * @package PhpMyAdmin
  */
 
 /**
  * Get the variables sent or posted to this script and a core script
  */
-require_once './libraries/common.inc.php';
-require_once './libraries/zip.lib.php';
-require_once './libraries/plugin_interface.lib.php';
+require_once 'libraries/common.inc.php';
+require_once 'libraries/zip.lib.php';
+require_once 'libraries/plugin_interface.lib.php';
+
+/**
+ * Sets globals from all $_POST (in export.php only)
+ * Would it not be tiresome to list all export-plugin options here?
+ */
+foreach ($_POST as $one_post_param => $one_post_value)
+{
+    $GLOBALS[$one_post_param] = $one_post_value;
+}
 
 PMA_checkParameters(array('what', 'export_type'));
 
 // Scan plugins
 $export_list = PMA_getPlugins(
-    './libraries/export/',
+    'libraries/export/',
     array(
         'export_type' => $export_type,
         'single_table' => isset($single_table)));
@@ -75,16 +84,16 @@ if ($_REQUEST['output_format'] == 'astext') {
 // Does export require to be into file?
 if (isset($export_list[$type]['force_file']) && ! $asfile) {
     $message = PMA_Message::error(__('Selected export type has to be saved in file!'));
-    include_once './libraries/header.inc.php';
+    include_once 'libraries/header.inc.php';
     if ($export_type == 'server') {
         $active_page = 'server_export.php';
-        include './server_export.php';
+        include 'server_export.php';
     } elseif ($export_type == 'database') {
         $active_page = 'db_export.php';
-        include './db_export.php';
+        include 'db_export.php';
     } else {
         $active_page = 'tbl_export.php';
-        include './tbl_export.php';
+        include 'tbl_export.php';
     }
     exit();
 }
@@ -107,7 +116,7 @@ if ($export_type == 'server') {
 }
 
 // Get the functions specific to the export type
-require './libraries/export/' . PMA_securePath($type) . '.php';
+require 'libraries/export/' . PMA_securePath($type) . '.php';
 
 /**
  * Increase time limit for script execution and initializes some variables
@@ -129,8 +138,9 @@ $time_start = time();
  * Output handler for all exports, if needed buffering, it stores data into
  * $dump_buffer, otherwise it prints thems out.
  *
- * @param string  $line  the insert statement
- * @return  bool    Whether output succeeded
+ * @param string $line the insert statement
+ *
+ * @return bool Whether output succeeded
  */
 function PMA_exportOutputHandler($line)
 {
@@ -258,18 +268,27 @@ if ($asfile) {
     $pma_uri_parts = parse_url($cfg['PmaAbsoluteUri']);
     if ($export_type == 'server') {
         if (isset($remember_template)) {
-            $GLOBALS['PMA_Config']->setUserValue('pma_server_filename_template',
-                'Export/file_template_server', $filename_template);
+            $GLOBALS['PMA_Config']->setUserValue(
+                'pma_server_filename_template',
+                'Export/file_template_server',
+                $filename_template
+            );
         }
     } elseif ($export_type == 'database') {
         if (isset($remember_template)) {
-            $GLOBALS['PMA_Config']->setUserValue('pma_db_filename_template',
-                'Export/file_template_database', $filename_template);
+            $GLOBALS['PMA_Config']->setUserValue(
+                'pma_db_filename_template',
+                'Export/file_template_database',
+                $filename_template
+            );
         }
     } else {
         if (isset($remember_template)) {
-            $GLOBALS['PMA_Config']->setUserValue('pma_table_filename_template',
-                'Export/file_template_table', $filename_template);
+            $GLOBALS['PMA_Config']->setUserValue(
+                'pma_table_filename_template',
+                'Export/file_template_table',
+                $filename_template
+            );
         }
     }
     $filename = PMA_expandUserString($filename_template);
@@ -318,16 +337,16 @@ if ($save_on_server) {
         }
     }
     if (isset($message)) {
-        include_once './libraries/header.inc.php';
+        include_once 'libraries/header.inc.php';
         if ($export_type == 'server') {
             $active_page = 'server_export.php';
-            include './server_export.php';
+            include 'server_export.php';
         } elseif ($export_type == 'database') {
             $active_page = 'db_export.php';
-            include './db_export.php';
+            include 'db_export.php';
         } else {
             $active_page = 'tbl_export.php';
-            include './tbl_export.php';
+            include 'tbl_export.php';
         }
         exit();
     }
@@ -352,26 +371,26 @@ if (!$save_on_server) {
             $num_tables = count($tables);
             if ($num_tables == 0) {
                 $message = PMA_Message::error(__('No tables found in database.'));
-                include_once './libraries/header.inc.php';
+                include_once 'libraries/header.inc.php';
                 $active_page = 'db_export.php';
-                include './db_export.php';
+                include 'db_export.php';
                 exit();
             }
         }
         $backup_cfgServer = $cfg['Server'];
-        include_once './libraries/header.inc.php';
+        include_once 'libraries/header.inc.php';
         $cfg['Server'] = $backup_cfgServer;
         unset($backup_cfgServer);
-        echo "\n" . '<div align="' . $cell_align_left . '">' . "\n";
+        echo "\n" . '<div style="text-align: ' . $cell_align_left . '">' . "\n";
         //echo '    <pre>' . "\n";
 
         /**
          * Displays a back button with all the $_REQUEST data in the URL (store in a variable to also display after the textarea)
          */
-         $back_button = '<p>[ <a href="';
+        $back_button = '<p>[ <a href="';
         if ($export_type == 'server') {
-           $back_button .= 'server_export.php?' . PMA_generate_common_url();
-         } elseif ($export_type == 'database') {
+            $back_button .= 'server_export.php?' . PMA_generate_common_url();
+        } elseif ($export_type == 'database') {
             $back_button .= 'db_export.php?' . PMA_generate_common_url($db);
         } else {
             $back_button .= 'tbl_export.php?' . PMA_generate_common_url($db, $table);
@@ -416,7 +435,7 @@ do {
         $cfgRelation = PMA_getRelationsParam();
     }
     if ($do_mime) {
-        include_once './libraries/transformations.lib.php';
+        include_once 'libraries/transformations.lib.php';
     }
 
     // Include dates in export?
@@ -434,7 +453,8 @@ do {
         // Walk over databases
         foreach ($GLOBALS['pma']->databases as $current_db) {
             if ((isset($tmp_select) && strpos(' ' . $tmp_select, '|' . $current_db . '|'))
-                || ! isset($tmp_select)) {
+                || ! isset($tmp_select)
+            ) {
                 if (!PMA_exportDBHeader($current_db)) {
                     break 2;
                 }
@@ -600,16 +620,16 @@ do {
 // End of fake loop
 
 if ($save_on_server && isset($message)) {
-    include_once './libraries/header.inc.php';
+    include_once 'libraries/header.inc.php';
     if ($export_type == 'server') {
         $active_page = 'server_export.php';
-        include './server_export.php';
+        include 'server_export.php';
     } elseif ($export_type == 'database') {
         $active_page = 'db_export.php';
-        include './db_export.php';
+        include 'db_export.php';
     } else {
         $active_page = 'tbl_export.php';
-        include './tbl_export.php';
+        include 'tbl_export.php';
     }
     exit();
 }
@@ -654,16 +674,16 @@ if (!empty($asfile)) {
             $message = new PMA_Message(__('Dump has been saved to file %s.'), PMA_Message::SUCCESS, $save_filename);
         }
 
-        include_once './libraries/header.inc.php';
+        include_once 'libraries/header.inc.php';
         if ($export_type == 'server') {
             $active_page = 'server_export.php';
-            include_once './server_export.php';
+            include_once 'server_export.php';
         } elseif ($export_type == 'database') {
             $active_page = 'db_export.php';
-            include_once './db_export.php';
+            include_once 'db_export.php';
         } else {
             $active_page = 'tbl_export.php';
-            include_once './tbl_export.php';
+            include_once 'tbl_export.php';
         }
         exit();
     } else {
@@ -704,6 +724,6 @@ if (!empty($asfile)) {
 //]]>
 </script>
 <?php
-    include './libraries/footer.inc.php';
+    include 'libraries/footer.inc.php';
 } // end if
 ?>

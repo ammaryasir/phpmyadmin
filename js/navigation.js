@@ -34,6 +34,12 @@ function toggle(id, only_open)
             img.src = newimg.attr('src');
             img.alt = '-';
         }
+        // if only one sub-list, open as well
+        var $submenus = $(el).find("> li > ul");
+        var $sublinks = $(el).find("> li > a.item, > li > a.tableicon");
+        if ($submenus.length == 1 && $sublinks.length == 0) {
+            toggle($submenus.prop("id").split("subel").join(""), true);
+        }
     } else {
         el.style.display = 'none';
         if (img) {
@@ -61,9 +67,9 @@ function PMA_callFunctionDelayed(myfunction, delay)
 function PMA_saveFrameSizeReal()
 {
     if (parent.text_dir == 'ltr') {
-        pma_navi_width = parseInt(parent.document.getElementById('mainFrameset').cols)
+        pma_navi_width = parseInt(parent.document.getElementById('mainFrameset').cols);
     } else {
-        pma_navi_width = parent.document.getElementById('mainFrameset').cols.match(/\d+$/)
+        pma_navi_width = parent.document.getElementById('mainFrameset').cols.match(/\d+$/);
     }
     if ((pma_navi_width > 0) && (pma_navi_width != PMA_getCookie('pma_navi_width'))) {
         PMA_setCookie('pma_navi_width', pma_navi_width, expires);

@@ -8,11 +8,11 @@
 /**
  * Gets the variables sent or posted to this script, then displays headers
  */
-require_once './libraries/common.inc.php';
+require_once 'libraries/common.inc.php';
 
 if (! isset($selected_tbl)) {
-    include './libraries/db_common.inc.php';
-    include './libraries/db_info.inc.php';
+    include 'libraries/db_common.inc.php';
+    include 'libraries/db_info.inc.php';
 }
 
 
@@ -21,8 +21,8 @@ if (! isset($selected_tbl)) {
  */
 $cfgRelation  = PMA_getRelationsParam();
 
-require_once './libraries/transformations.lib.php';
-
+require_once 'libraries/transformations.lib.php';
+require_once 'libraries/Index.class.php';
 
 /**
  * Check parameters
@@ -189,7 +189,7 @@ foreach ($tables as $table) {
             $type_nowrap  = '';
 
         } else {
-            $type_nowrap  = ' nowrap="nowrap"';
+            $type_nowrap  = ' class="nowrap"';
         }
         $type = htmlspecialchars($extracted_fieldspec['print_type']);
         $attribute     = $extracted_fieldspec['attribute'];
@@ -219,7 +219,7 @@ foreach ($tables as $table) {
         }
         ?>
 <tr class="<?php echo $odd_row ? 'odd' : 'even'; $odd_row = ! $odd_row; ?>">
-    <td nowrap="nowrap">
+    <td class="nowrap">
         <?php
         if (isset($pk_array[$row['Field']])) {
             echo '<u>' . htmlspecialchars($field_name) . '</u>';
@@ -228,10 +228,10 @@ foreach ($tables as $table) {
         }
         ?>
     </td>
-    <td<?php echo $type_nowrap; ?> xml:lang="en" dir="ltr"><?php echo $type; ?></td>
+    <td<?php echo $type_nowrap; ?> lang="en" dir="ltr"><?php echo $type; ?></td>
 <?php /*    <td<?php echo $type_nowrap; ?>><?php echo $attribute; ?></td>*/ ?>
     <td><?php echo (($row['Null'] == 'NO') ? __('No') : __('Yes')); ?></td>
-    <td nowrap="nowrap"><?php if (isset($row['Default'])) { echo $row['Default']; } ?></td>
+    <td class="nowrap"><?php if (isset($row['Default'])) { echo $row['Default']; } ?></td>
 <?php /*    <td<?php echo $type_nowrap; ?>><?php echo $row['Extra']; ?></td>*/ ?>
         <?php
         if ($have_rel) {
@@ -262,6 +262,12 @@ foreach ($tables as $table) {
     $count++;
     ?>
 </table>
+<?php
+// display indexes information
+    if (count(PMA_Index::getFromTable($table, $db)) > 0){
+        echo PMA_Index::getView($table, $db, true);
+    }
+?>
 </div>
     <?php
 } //ends main while
@@ -271,5 +277,5 @@ foreach ($tables as $table) {
  */
 PMA_printButton();
 
-require './libraries/footer.inc.php';
+require 'libraries/footer.inc.php';
 ?>

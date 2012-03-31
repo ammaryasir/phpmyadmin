@@ -8,7 +8,7 @@
 /**
  *
  */
-require_once './libraries/common.inc.php';
+require_once 'libraries/common.inc.php';
 
 /**
  * Does the common work
@@ -16,83 +16,52 @@ require_once './libraries/common.inc.php';
 $GLOBALS['js_include'][] = 'server_privileges.js';
 $GLOBALS['js_include'][] = 'replication.js';
 
-require './libraries/server_common.inc.php';
-require './libraries/replication.inc.php';
-require './libraries/replication_gui.lib.php';
-require_once './libraries/server_synchronize.lib.php';
+require 'libraries/server_common.inc.php';
+require 'libraries/replication.inc.php';
+require 'libraries/replication_gui.lib.php';
+require_once 'libraries/server_synchronize.lib.php';
 
 /**
  * Checks if the user is allowed to do what he tries to...
  */
 if (! $is_superuser) {
-    include './libraries/server_links.inc.php';
+    include 'libraries/server_links.inc.php';
     echo '<h2>' . "\n"
         . PMA_getIcon('s_replication.png')
         . __('Replication') . "\n"
         . '</h2>' . "\n";
     PMA_Message::error(__('No Privileges'))->display();
-    include './libraries/footer.inc.php';
+    include 'libraries/footer.inc.php';
 }
 
 /**
  * Sets globals from $_REQUEST
  */
-if (isset($_REQUEST['hostname'])) {
-    $GLOBALS['hostname'] = $_REQUEST['hostname'];
-}
-if (isset($_REQUEST['mr_adduser'])) {
-    $GLOBALS['mr_adduser'] = $_REQUEST['mr_adduser'];
-}
-if (isset($_REQUEST['mr_configure'])) {
-    $GLOBALS['mr_configure'] = $_REQUEST['mr_configure'];
-}
-if (isset($_REQUEST['pma_pw'])) {
-    $GLOBALS['pma_pw'] = $_REQUEST['pma_pw'];
-}
-if (isset($_REQUEST['port'])) {
-    $GLOBALS['port'] = $_REQUEST['port'];
-}
-if (isset($_REQUEST['repl_clear_scr'])) {
-    $GLOBALS['repl_clear_scr'] = $_REQUEST['repl_clear_scr'];
-}
-if (isset($_REQUEST['repl_data'])) {
-    $GLOBALS['repl_data'] = $_REQUEST['repl_data'];
-}
-if (isset($_REQUEST['sl_configure'])) {
-    $GLOBALS['sl_configure'] = $_REQUEST['sl_configure'];
-}
-if (isset($_REQUEST['sl_sync'])) {
-    $GLOBALS['sl_sync'] = $_REQUEST['sl_sync'];
-}
-if (isset($_REQUEST['slave_changemaster'])) {
-    $GLOBALS['slave_changemaster'] = $_REQUEST['slave_changemaster'];
-}
-if (isset($_REQUEST['sr_skip_errors_count'])) {
-    $GLOBALS['sr_skip_errors_count'] = $_REQUEST['sr_skip_errors_count'];
-}
-if (isset($_REQUEST['sr_slave_action'])) {
-    $GLOBALS['sr_slave_action'] = $_REQUEST['sr_slave_action'];
-}
-if (isset($_REQUEST['sr_slave_control_parm'])) {
-    $GLOBALS['sr_slave_control_parm'] = $_REQUEST['sr_slave_control_parm'];
-}
-if (isset($_REQUEST['sr_slave_server_control'])) {
-    $GLOBALS['sr_slave_server_control'] = $_REQUEST['sr_slave_server_control'];
-}
-if (isset($_REQUEST['sr_slave_skip_error'])) {
-    $GLOBALS['sr_slave_skip_error'] = $_REQUEST['sr_slave_skip_error'];
-}
-if (isset($_REQUEST['sr_take_action'])) {
-    $GLOBALS['sr_take_action'] = $_REQUEST['sr_take_action'];
-}
-if (isset($_REQUEST['url_params'])) {
-    $GLOBALS['url_params'] = $_REQUEST['url_params'];
-}
-if (isset($_REQUEST['username'])) {
-    $GLOBALS['username'] = $_REQUEST['username'];
-}
-if (isset($_REQUEST[''])) {
-    $GLOBALS[''] = $_REQUEST[''];
+$request_params = array(
+    'hostname',
+    'mr_adduser',
+    'mr_configure',
+    'pma_pw',
+    'port',
+    'repl_clear_scr',
+    'repl_data',
+    'sl_configure',
+    'sl_sync',
+    'slave_changemaster',
+    'sr_skip_errors_count',
+    'sr_slave_action',
+    'sr_slave_control_parm',
+    'sr_slave_server_control',
+    'sr_slave_skip_error',
+    'sr_take_action',
+    'url_params',
+    'username'
+);
+
+foreach ($request_params as $one_request_param) {
+    if (isset($_REQUEST[$one_request_param])) {
+        $GLOBALS[$one_request_param] = $_REQUEST[$one_request_param];
+    }
 }
 
 /**
@@ -215,7 +184,7 @@ if (isset($GLOBALS['sr_take_action'])) {
 /**
  * Displays the links
  */
-require './libraries/server_links.inc.php';
+require 'libraries/server_links.inc.php';
 
 echo '<div id="replication">';
 echo ' <h2>';
@@ -240,11 +209,13 @@ if ($server_master_status) {
         echo '<legend>' . __('Master replication') . '</legend>';
         echo __('This server is configured as master in a replication process.');
         echo '<ul>';
-        echo '  <li><a href="#" id="master_status_href">' . __('Show master status') . '</a></li>';
+        echo '  <li><a href="#" id="master_status_href">' . __('Show master status') . '</a>';
         PMA_replication_print_status_table('master', true, false);
+        echo '  </li>';
 
-        echo '  <li><a href="#" id="master_slaves_href">' . __('Show connected slaves') . '</a></li>';
+        echo '  <li><a href="#" id="master_slaves_href">' . __('Show connected slaves') . '</a>';
         PMA_replication_print_slaves_table(true);
+        echo '  </li>';
 
         $_url_params = $GLOBALS['url_params'];
         $_url_params['mr_adduser'] = true;
@@ -295,7 +266,7 @@ if (isset($GLOBALS['mr_configure'])) {
     echo ' </form>';
     echo '</fieldset>';
 
-    include './libraries/footer.inc.php';
+    include 'libraries/footer.inc.php';
     exit;
 }
 
@@ -364,8 +335,9 @@ if (! isset($GLOBALS['repl_clear_scr'])) {
         echo __('Server is configured as slave in a replication process. Would you like to:');
         echo '<br />';
         echo '<ul>';
-        echo ' <li><a href="#" id="slave_status_href">' . __('See slave status table') . '</a></li>';
+        echo ' <li><a href="#" id="slave_status_href">' . __('See slave status table') . '</a>';
         echo PMA_replication_print_status_table('slave', true, false);
+        echo ' </li>';
         if (isset($_SESSION['replication']['m_correct']) && $_SESSION['replication']['m_correct'] == true) {
             echo ' <li><a href="#" id="slave_synchronization_href">' . __('Synchronize databases with master') . '</a></li>';
             echo ' <div id="slave_synchronization_gui" style="display: none">';
@@ -413,6 +385,7 @@ if (! isset($GLOBALS['repl_clear_scr'])) {
         echo ' </li>';
         echo ' <li><a href="' . $reconfiguremaster_link . '">' . __('Change or reconfigure master server') . '</a></li>';
         echo '</ul>';
+        echo '</div>';
 
     } elseif (! isset($GLOBALS['sl_configure'])) {
         $_url_params = $GLOBALS['url_params'];
@@ -421,11 +394,10 @@ if (! isset($GLOBALS['repl_clear_scr'])) {
 
         echo sprintf(__('This server is not configured as slave in a replication process. Would you like to <a href="%s">configure</a> it?'), PMA_generate_common_url($_url_params));
     }
-    echo '</div>';
     echo '</fieldset>';
 }
 if (isset($GLOBALS['sl_configure'])) {
     PMA_replication_gui_changemaster("slave_changemaster");
 }
-require './libraries/footer.inc.php';
+require 'libraries/footer.inc.php';
 ?>

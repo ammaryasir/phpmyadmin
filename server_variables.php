@@ -5,14 +5,7 @@
  * @package PhpMyAdmin
  */
 
-/**
- * no need for variables importing
- * @ignore
- */
-if (! defined('PMA_NO_VARIABLES_IMPORT')) {
-    define('PMA_NO_VARIABLES_IMPORT', true);
-}
-require_once './libraries/common.inc.php';
+require_once 'libraries/common.inc.php';
 
 $GLOBALS['js_include'][] = 'server_variables.js';
 
@@ -24,12 +17,12 @@ PMA_AddJSVar('is_superuser', PMA_isSuperuser() ? true : false);
 /**
  * Does the common work
  */
-require './libraries/server_common.inc.php';
+require 'libraries/server_common.inc.php';
 
 /**
  * Required to display documentation links
  */
-require './libraries/server_variables_doc.php';
+require 'libraries/server_variables_doc.php';
 
 /**
  * Ajax request
@@ -88,7 +81,7 @@ if (isset($_REQUEST['ajax_request']) && $_REQUEST['ajax_request'] == true) {
 /**
  * Displays the links
  */
-require './libraries/server_links.inc.php';
+require 'libraries/server_links.inc.php';
 
 
 /**
@@ -137,7 +130,7 @@ foreach ($serverVars as $name => $value) {
     $row_class = ($odd_row ? 'odd' : 'even') . ' ' . ($has_session_value ? 'diffSession' : '');
     ?>
 <tr class="<?php echo $row_class; ?>">
-    <th nowrap="nowrap"><?php echo htmlspecialchars(str_replace('_', ' ', $name)); ?></th>
+    <th class="nowrap"><?php echo htmlspecialchars(str_replace('_', ' ', $name)); ?></th>
     <td class="value"><?php echo formatVariable($name, $value); ?></td>
     <td class="value"><?php
     // To display variable documentation link
@@ -177,6 +170,6 @@ function formatVariable($name, $value)
 /**
  * Sends the footer
  */
-require './libraries/footer.inc.php';
+require 'libraries/footer.inc.php';
 
 ?>

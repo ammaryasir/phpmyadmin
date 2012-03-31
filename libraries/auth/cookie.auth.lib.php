@@ -3,7 +3,8 @@
 /**
  * Set of functions used to run cookie based authentication.
  *
- * @package PhpMyAdmin-Auth-Cookie
+ * @package PhpMyAdmin-Auth
+ * @subpackage Cookie
  */
 
 if (! defined('PHPMYADMIN')) {
@@ -169,8 +170,10 @@ if (top != self) {
     ?></a>
 <h1>
     <?php
-    echo sprintf(__('Welcome to %s'),
-        '<bdo dir="ltr" xml:lang="en">' . $page_title . '</bdo>');
+    echo sprintf(
+        __('Welcome to %s'),
+        '<bdo dir="ltr" lang="en">' . $page_title . '</bdo>'
+    );
     ?>
 </h1>
     <?php
@@ -195,7 +198,7 @@ if (top != self) {
     <legend>
 <?php
     echo __('Log in');
-    echo '<a href="./Documentation.html" target="documentation" ' .
+    echo '<a href="Documentation.html" target="documentation" ' .
         'title="' . __('phpMyAdmin documentation') . '"> ';
     if ($GLOBALS['cfg']['ReplaceHelpImg']) {
         echo PMA_getImage('b_help.png', __('phpMyAdmin documentation'));
@@ -392,7 +395,8 @@ function PMA_auth_check()
 
     $GLOBALS['PHP_AUTH_USER'] = PMA_blowfish_decrypt(
         $_COOKIE['pmaUser-' . $GLOBALS['server']],
-        PMA_get_blowfish_secret());
+        PMA_get_blowfish_secret()
+    );
 
     // user was never logged in since session start
     if (empty($_SESSION['last_access_time'])) {
@@ -418,7 +422,8 @@ function PMA_auth_check()
 
     $GLOBALS['PHP_AUTH_PW'] = PMA_blowfish_decrypt(
         $_COOKIE['pmaPass-' . $GLOBALS['server']],
-        PMA_get_blowfish_secret());
+        PMA_get_blowfish_secret()
+    );
 
     if ($GLOBALS['PHP_AUTH_PW'] == "\xff(blank)") {
         $GLOBALS['PHP_AUTH_PW'] = '';
@@ -471,7 +476,7 @@ function PMA_auth_set_user()
         }
         if ($cfg['Server']['host'] != $GLOBALS['pma_auth_server']) {
             $cfg['Server']['host'] = $tmp_host;
-            if (!empty($tmp_port)) {
+            if (! empty($tmp_port)) {
                 $cfg['Server']['port'] = $tmp_port;
             }
         }
@@ -488,16 +493,22 @@ function PMA_auth_set_user()
 
     // Name and password cookies need to be refreshed each time
     // Duration = one month for username
-    $GLOBALS['PMA_Config']->setCookie('pmaUser-' . $GLOBALS['server'],
+    $GLOBALS['PMA_Config']->setCookie(
+        'pmaUser-' . $GLOBALS['server'],
         PMA_blowfish_encrypt($cfg['Server']['user'],
-            PMA_get_blowfish_secret()));
+        PMA_get_blowfish_secret())
+    );
 
     // Duration = as configured
-    $GLOBALS['PMA_Config']->setCookie('pmaPass-' . $GLOBALS['server'],
-        PMA_blowfish_encrypt(!empty($cfg['Server']['password']) ? $cfg['Server']['password'] : "\xff(blank)",
-            PMA_get_blowfish_secret()),
+    $GLOBALS['PMA_Config']->setCookie(
+        'pmaPass-' . $GLOBALS['server'],
+        PMA_blowfish_encrypt(
+            ! empty($cfg['Server']['password']) ? $cfg['Server']['password'] : "\xff(blank)",
+            PMA_get_blowfish_secret()
+        ),
         null,
-        $GLOBALS['cfg']['LoginCookieStore']);
+        $GLOBALS['cfg']['LoginCookieStore']
+    );
 
     // Set server cookies if required (once per session) and, in this case, force
     // reload to ensure the client accepts cookies

@@ -94,7 +94,7 @@ class PMA_Config
     /**
      * sets system and application settings
      *
-     * @return nothing
+     * @return void
      */
     function checkSystem()
     {
@@ -121,7 +121,7 @@ class PMA_Config
     /**
      * whether to use gzip output compression or not
      *
-     * @return nothing
+     * @return void
      */
     function checkOutputCompression()
     {
@@ -150,7 +150,7 @@ class PMA_Config
      *
      * @see http://www.phpbuilder.net/columns/tim20000821.php
      *
-     * @return nothing
+     * @return void
      */
     function checkClient()
     {
@@ -199,8 +199,8 @@ class PMA_Config
         )) {
             $this->set('PMA_USR_BROWSER_VER', $log_version[1]);
             $this->set('PMA_USR_BROWSER_AGENT', 'OMNIWEB');
-        // Konqueror 2.2.2 says Konqueror/2.2.2
-        // Konqueror 3.0.3 says Konqueror/3
+            // Konqueror 2.2.2 says Konqueror/2.2.2
+            // Konqueror 3.0.3 says Konqueror/3
         } elseif (preg_match(
             '@(Konqueror/)(.*)(;)@',
             $HTTP_USER_AGENT,
@@ -208,10 +208,7 @@ class PMA_Config
         )) {
             $this->set('PMA_USR_BROWSER_VER', $log_version[2]);
             $this->set('PMA_USR_BROWSER_AGENT', 'KONQUEROR');
-        } elseif (preg_match(
-            '@Mozilla/([0-9].[0-9]{1,2})@',
-            $HTTP_USER_AGENT,
-            $log_version)
+        } elseif (preg_match('@Mozilla/([0-9].[0-9]{1,2})@', $HTTP_USER_AGENT, $log_version)
             && preg_match('@Safari/([0-9]*)@', $HTTP_USER_AGENT, $log_version2)
         ) {
             $this->set('PMA_USR_BROWSER_VER', $log_version[1] . '.' . $log_version2[1]);
@@ -220,10 +217,8 @@ class PMA_Config
             $this->set('PMA_USR_BROWSER_VER', '1.9');
             $this->set('PMA_USR_BROWSER_AGENT', 'GECKO');
         } elseif (
-            preg_match('@Mozilla/([0-9].[0-9]{1,2})@',
-            $HTTP_USER_AGENT,
-            $log_version
-        )) {
+            preg_match('@Mozilla/([0-9].[0-9]{1,2})@', $HTTP_USER_AGENT, $log_version)
+        ) {
             $this->set('PMA_USR_BROWSER_VER', $log_version[1]);
             $this->set('PMA_USR_BROWSER_AGENT', 'MOZILLA');
         } else {
@@ -235,7 +230,7 @@ class PMA_Config
     /**
      * Whether GD2 is present
      *
-     * @return nothing
+     * @return void
      */
     function checkGd2()
     {
@@ -278,7 +273,7 @@ class PMA_Config
     /**
      * Whether the Web server php is running on is IIS
      *
-     * @return nothing
+     * @return void
      */
     function checkWebServer()
     {
@@ -297,7 +292,7 @@ class PMA_Config
     /**
      * Whether the os php is running on is windows or not
      *
-     * @return nothing
+     * @return void
      */
     function checkWebServerOs()
     {
@@ -318,7 +313,7 @@ class PMA_Config
     /**
      * detects PHP version
      *
-     * @return nothing
+     * @return void
      */
     function checkPhpVersion()
     {
@@ -595,8 +590,7 @@ class PMA_Config
             if ((! isset($config_data['collation_connection'])
                 && $GLOBALS['collation_connection'] != 'utf8_general_ci')
                 || isset($config_data['collation_connection'])
-                && $GLOBALS['collation_connection']
-                    != $config_data['collation_connection']
+                && $GLOBALS['collation_connection'] != $config_data['collation_connection']
             ) {
                 $this->setUserValue(
                     null,
@@ -627,11 +621,11 @@ class PMA_Config
      * by {@link loadUserPreferences()}
      *
      * @param string $cookie_name   can be null
-     * @param string $cfg_path
+     * @param string $cfg_path      configuration path
      * @param mixed  $new_cfg_value new value
      * @param mixed  $default_value default value
      *
-     * @return nothing
+     * @return void
      */
     function setUserValue($cookie_name, $cfg_path, $new_cfg_value, $default_value = null)
     {
@@ -682,9 +676,9 @@ class PMA_Config
     /**
      * set source
      *
-     * @param string  $source
+     * @param string $source source
      *
-     * @return nothing
+     * @return void
      */
     function setSource($source)
     {
@@ -694,7 +688,7 @@ class PMA_Config
     /**
      * checks if the config folder still exists and terminates app if true
      *
-     * @return nothing
+     * @return void
      */
     function checkConfigFolder()
     {
@@ -724,7 +718,8 @@ class PMA_Config
         if (! is_readable($this->getSource())) {
             $this->source_mtime = 0;
             die(
-                sprintf(__('Existing configuration file (%s) is not readable.'),
+                sprintf(
+                    __('Existing configuration file (%s) is not readable.'),
                     $this->getSource()
                 )
             );
@@ -737,7 +732,7 @@ class PMA_Config
      * verifies the permissions on config file (if asked by configuration)
      * (must be called after config.inc.php has been merged)
      *
-     * @return nothing
+     * @return void
      */
     function checkPermissions()
     {
@@ -776,7 +771,7 @@ class PMA_Config
      * @param string $setting configuration option
      * @param string $value   new value for configuration option
      *
-     * @return nothing
+     * @return void
      */
     function set($setting, $value)
     {
@@ -969,7 +964,7 @@ class PMA_Config
      *
      * @todo check validity of $_REQUEST['collation_connection']
      *
-     * @return nothing
+     * @return void
      */
     function checkCollationConnection()
     {
@@ -984,7 +979,7 @@ class PMA_Config
     /**
      * checks for font size configuration, and sets font size as requested by user
      *
-     * @return nothing
+     * @return void
      */
     function checkFontsize()
     {
@@ -1012,7 +1007,7 @@ class PMA_Config
     /**
      * checks if upload is enabled
      *
-     * @return nothing
+     * @return void
      */
     function checkUpload()
     {
@@ -1034,7 +1029,7 @@ class PMA_Config
      *
      * this section generates $max_upload_size in bytes
      *
-     * @return nothing
+     * @return void
      */
     function checkUploadSize()
     {
@@ -1055,7 +1050,7 @@ class PMA_Config
     /**
      * check for https
      *
-     * @return nothing
+     * @return void
      */
     function checkIsHttps()
     {
@@ -1144,7 +1139,7 @@ class PMA_Config
     /**
      * detect correct cookie path
      *
-     * @return nothing
+     * @return void
      */
     function checkCookiePath()
     {
@@ -1174,7 +1169,7 @@ class PMA_Config
     /**
      * enables backward compatibility
      *
-     * @return nothing
+     * @return void
      */
     function enableBc()
     {
@@ -1211,7 +1206,7 @@ class PMA_Config
     /**
      * @todo finish
      *
-     * @return nothing
+     * @return void
      */
     function save()
     {
@@ -1220,10 +1215,11 @@ class PMA_Config
     /**
      * returns options for font size selection
      *
-     * @static
      * @param string $current_size current selected font size with unit
      *
      * @return array selectable font sizes
+     *
+     * @static
      */
     static protected function _getFontsizeOptions($current_size = '82%')
     {
@@ -1283,7 +1279,6 @@ class PMA_Config
      * returns html selectbox for font sizes
      *
      * @static
-     * @param string $current_size currently slected font size with unit
      *
      * @return string html selectbox
      */
@@ -1318,7 +1313,6 @@ class PMA_Config
      * return complete font size selection form
      *
      * @static
-     * @param string $current_size currently slected font size with unit
      *
      * @return string html selectbox
      */
@@ -1357,11 +1351,11 @@ class PMA_Config
      * sets cookie if value is different from current cokkie value,
      * or removes if value is equal to default
      *
-     * @param string  $cookie   name of cookie to remove
-     * @param mixed   $value    new cookie value
-     * @param string  $default  default value
-     * @param int     $validity validity of cookie in seconds (default is one month)
-     * @param bool    $httponly whether cookie is only for HTTP (and not for scripts)
+     * @param string $cookie   name of cookie to remove
+     * @param mixed  $value    new cookie value
+     * @param string $default  default value
+     * @param int    $validity validity of cookie in seconds (default is one month)
+     * @param bool   $httponly whether cookie is only for HTTP (and not for scripts)
      *
      * @return boolean result of setcookie()
      */

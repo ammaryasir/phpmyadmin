@@ -12,10 +12,10 @@
  */
 require_once 'PHPUnit/Framework.php';
 require_once 'PHPUnit/TextUI/TestRunner.php';
-require_once './PmaSeleniumTestCase.php';
-require_once './PmaSeleniumLoginTest.php';
-require_once './PmaSeleniumXssTest.php';
-require_once './PmaSeleniumPrivilegesTest.php';
+require_once dirname(__FILE__).'/selenium/PmaSeleniumTestCase.php';
+require_once dirname(__FILE__).'/selenium/PmaSeleniumLoginTest.php';
+require_once dirname(__FILE__).'/selenium/PmaSeleniumXssTest.php';
+require_once dirname(__FILE__).'/selenium/PmaSeleniumPrivilegesTest.php';
 
 class AllSeleniumTests
 {
@@ -30,8 +30,8 @@ class AllSeleniumTests
         $suite = new PHPUnit_Framework_TestSuite('phpMyAdmin');
 
         $suite->addTestSuite('PmaSeleniumLoginTest');
-        $suite->addTestSuite('PmaSeleniumXssTest');
-        $suite->addTestSuite('PmaSeleniumPrivilegesTest');
+        //$suite->addTestSuite('PmaSeleniumXssTest');
+        //$suite->addTestSuite('PmaSeleniumPrivilegesTest');
         return $suite;
     }
 }
